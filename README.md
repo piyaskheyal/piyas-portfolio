@@ -115,7 +115,7 @@ featured: true
 order: 4
 simEngine: "NVIDIA Isaac Lab / PhysX 5.4"
 middleware: "ROS 2 Humble / C++20"
-hardware: "Custom 12-DoF Quadruped + Jetson Orin Nano"
+hardware: "Custom 12-DoF Quadruped + Raspberry Pi 5"
 tags: ["Isaac Lab", "Reinforcement Learning", "Quadruped", "Sim-to-Real", "C++"]
 metrics:
   - label: "Parallel Envs"
@@ -130,7 +130,7 @@ architectureSteps:
   - "Rigid Body CAD & URDF Mass Inertia Identification"
   - "Massively Parallel Isaac Lab Simulation with Domain Randomization"
   - "PPO Actor-Critic Policy Training & Reward Convergence"
-  - "TensorRT Engine Quantization & Edge Deployment on Jetson Orin"
+  - "C++ Inference Engine & Edge Deployment on Raspberry Pi 5"
 ---
 
 ### Engineering Overview

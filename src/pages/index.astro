@@ -35,6 +35,7 @@ const projectsForClient = await Promise.all(
       metrics: entry.data.metrics,
       repoUrl: entry.data.repoUrl,
       quickCommand: entry.data.quickCommand,
+      youtubeId: entry.data.youtubeId,
       architectureSteps: entry.data.architectureSteps,
       bodyHtml: entry.body
         .replace(/### (.*)/g, '<h3>$1</h3>')

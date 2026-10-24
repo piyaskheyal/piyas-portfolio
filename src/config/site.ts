@@ -24,12 +24,16 @@ export const SITE_CONFIG = {
   // Key metrics for animated counters
   metrics: {
     rigsCompleted: '12+',
-    simHours: '500+',
-    yearsExp: '7+',
-    policyConvergence: '99.2%',
+    yearsExp: '1.5+',
+    mechatronicsYears: '3',
     parallelEnvs: '4,096+',
     globalClients: '80',
     successfulProjects: '160',
+  },
+
+  education: {
+    degree: 'Mechatronics Engineering',
+    institution: 'Rajshahi University of Engineering & Technology (RUET)',
   },
 
   stats: [
@@ -68,18 +72,20 @@ export const SITE_CONFIG = {
 
   // Toolchain marquee
   toolchains: [
-    'NVIDIA Isaac Sim',
-    'ROS 2 Humble / Jazzy',
-    'PyTorch 2.4',
-    'LeRobot VLA',
-    'Gazebo Harmonic',
-    'SolidWorks CAD',
-    'MuJoCo Physics',
-    'Docker Containerization',
-    'C++20 RT Systems',
-    'Python 3.11',
-    'Foxglove Studio',
-    'STM32 Bare-Metal',
+    'Isaaclab',
+    'Isaacsim',
+    'Gazebo',
+    'ROS2',
+    'Onshape',
+    'Fusion360',
+    'STM32',
+    'ESP32',
+    'AVR Boards',
+    'RTOS',
+    'Python',
+    'C++',
+    'Mujoco',
+    'Foxglove',
   ],
 
   // 4 Core Engineering Disciplines (Services)
@@ -178,7 +184,7 @@ export const SITE_CONFIG = {
       step: '04',
       title: 'REAL-WORLD DEPLOYMENT',
       icon: '❖',
-      desc: 'Quantizing neural weights for NVIDIA Jetson Orin Nano edge execution and validating zero-shot Sim-to-Real transfer on physical hardware.',
+      desc: 'Deploying control policies, navigation stacks, and ROS 2 nodes to Raspberry Pi (4, 5, 3B+) edge computers with real-time physical validation.',
     },
   ],
 
@@ -234,7 +240,7 @@ export const SITE_CONFIG = {
     },
     {
       q: 'What compute hardware do you deploy models to?',
-      a: 'For simulation and training: RTX 4090 GPU workstations. For edge robot deployment: NVIDIA Jetson Orin Nano, Raspberry Pi 5 with Linux RT kernels, and STM32 MCUs for deterministic hardware interrupts.',
+      a: 'For simulation and training: High-performance GPU workstations with Isaac Sim and Gazebo. For edge robot deployment: Raspberry Pi (5, 4, 3B+) single-board computers, and STM32 / ESP32 MCUs for deterministic hardware timing.',
     },
     {
       q: 'Are you available for contract or full-time roles?',

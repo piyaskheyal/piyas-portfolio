@@ -20,6 +20,7 @@ const projectsCollection = defineCollection({
       })
     ),
     videoUrl: z.string().optional(),
+    youtubeId: z.string().optional(),
     repoUrl: z.string().optional(),
     quickCommand: z.string().optional(), // Copyable terminal snippet inside the drawer
     architectureSteps: z.array(z.string()),

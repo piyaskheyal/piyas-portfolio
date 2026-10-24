@@ -25,7 +25,7 @@ import { SITE_CONFIG } from '../config/site';
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
       <!-- Col 1 (4 cols): 2 Stacked White Cards -->
       <div class="reveal-on-scroll delay-1 flex flex-col gap-6 lg:col-span-4">
-        <!-- Top Card -->
+        <!-- Top Card: Mechatronics & Sim Years -->
         <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-8 shadow-sm transition-all hover:border-[#EB4618]">
           <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
           <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
@@ -35,15 +35,18 @@ import { SITE_CONFIG } from '../config/site';
           <span class="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#EB4618]">
             <span>✦</span> MECHATRONICS &amp; SIM YEARS
           </span>
-          <div class="mt-4 font-extrabold text-6xl sm:text-7xl text-zinc-950 dark:text-white tracking-tighter">
-            <AnimatedCounter client:visible value={SITE_CONFIG.metrics.yearsExp} />
+          <div class="mt-4 flex items-baseline gap-2">
+            <span class="font-extrabold text-6xl sm:text-7xl text-zinc-950 dark:text-white tracking-tighter">
+              <AnimatedCounter client:visible value="3" />
+            </span>
+            <span class="font-mono text-xl sm:text-2xl font-bold uppercase text-zinc-500">YEARS</span>
           </div>
           <p class="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Hands-on hardware fabrication, CAD modeling, and GPU accelerated simulation across academic and industrial platforms.
+            Hands-on mechatronics engineering, hardware prototyping, CAD modeling, and robotics simulation.
           </p>
         </div>
 
-        <!-- Bottom Card -->
+        <!-- Bottom Card: Education (RUET Mechatronics) -->
         <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-8 shadow-sm transition-all hover:border-[#EB4618]">
           <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
           <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
@@ -51,13 +54,16 @@ import { SITE_CONFIG } from '../config/site';
           <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
 
           <span class="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#EB4618]">
-            <span>✦</span> POLICY CONVERGENCE RATE
+            <span>✦</span> ACADEMIC BACKGROUND
           </span>
-          <div class="mt-4 font-extrabold text-6xl sm:text-7xl text-[#EB4618] tracking-tighter">
-            <AnimatedCounter client:visible value={SITE_CONFIG.metrics.policyConvergence} />
+          <div class="mt-4 font-extrabold text-4xl sm:text-5xl text-[#EB4618] tracking-tight">
+            RUET
           </div>
-          <p class="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Tightly constrained reward formulations avoiding local minima in bipedal stabilization and robotic arm inverse kinematics.
+          <h4 class="mt-2 text-base sm:text-lg font-bold uppercase text-zinc-950 dark:text-white">
+            Mechatronics Engineering
+          </h4>
+          <p class="mt-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Mechatronics Engineering in RUET (Rajshahi University of Engineering &amp; Technology). Specialized in robotics, control theory, and embedded hardware.
           </p>
         </div>
       </div>
@@ -119,7 +125,7 @@ import { SITE_CONFIG } from '../config/site';
 
       <!-- Col 3 (4 cols): 2 Stacked Cards -->
       <div class="reveal-on-scroll delay-3 flex flex-col gap-6 lg:col-span-4">
-        <!-- Top Card: Hardware / Simulation graphic tile -->
+        <!-- Top Card: Hardware / Simulation compute tile -->
         <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-gradient-to-br from-[#EB4618] to-[#C8320A] p-6 text-white overflow-hidden shadow-sm">
           <span class="crosshair-corner crosshair-tl text-white/50">+</span>
           <span class="crosshair-corner crosshair-tr text-white/50">+</span>
@@ -127,13 +133,13 @@ import { SITE_CONFIG } from '../config/site';
           <span class="crosshair-corner crosshair-br text-white/50">+</span>
 
           <span class="font-mono text-xs font-bold uppercase tracking-wider text-white/80">
-            COMPUTE &amp; COMPILER SUITE
+            COMPUTE &amp; EDGE PLATFORMS
           </span>
-          <h4 class="mt-3 text-2xl font-extrabold uppercase leading-tight text-white">
-            NVIDIA ISAAC SIM + JETSON ORIN EDGE
+          <h4 class="mt-3 text-xl sm:text-2xl font-extrabold uppercase leading-tight text-white">
+            ISAAC SIM + RASPBERRY PI 5, 4, 3B+
           </h4>
           <p class="mt-2 text-xs font-mono text-white/80">
-            Realtime PhysX 5.4 GPU solver with microsecond CUDA kernels.
+            High-fidelity simulation coupled with physical edge deployments on Raspberry Pi 5, 4, and 3B+.
           </p>
         </div>
 
