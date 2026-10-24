@@ -3,204 +3,312 @@
 @tailwind utilities;
 
 :root {
-  /* Precision Laboratory Light Theme Surface Tokens (RGB triplets) */
-  --surface-950: 246 248 250; /* #F6F8FA body canvas */
-  --surface-900: 255 255 255; /* #FFFFFF elevated cards */
-  --surface-800: 236 239 244; /* #ECEFF4 secondary surfaces / pills */
-  --surface-700: 222 226 233; /* #DEE2E9 active borders */
+  /* Swiss Editorial Palette - Default Light Mode */
+  --surface-950: 246 246 244; /* #F6F6F4 warm off-white */
+  --surface-900: 255 255 255; /* #FFFFFF pure white */
+  --surface-800: 235 235 233; /* #EBEBE9 stone gray */
+  --surface-700: 226 226 224; /* #E2E2E0 structural borders */
 
-  /* Emil Kowalski Custom Easing Curves */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  --brand-orange: #EB4618;
+  --brand-orange-dark: #C8320A;
+  --text-ink: #111111;
+  --text-muted: #8A8A8A;
+
+  --ease-swiss: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 html.dark {
-  /* Deep Carbon Robotics Telemetry Dark Theme Surface Tokens (RGB triplets) */
-  --surface-950: 9 10 12;    /* #090A0C */
-  --surface-900: 16 18 22;   /* #101216 */
-  --surface-800: 24 27 32;   /* #181B20 */
-  --surface-700: 36 41 48;   /* #242930 */
+  /* Swiss Dark Sections / Dark Mode */
+  --surface-950: 15 15 15;    /* #0F0F0F deep carbon black */
+  --surface-900: 22 22 22;   /* #161616 card surface */
+  --surface-800: 28 28 28;   /* #1C1C1C elevated tiles */
+  --surface-700: 44 44 44;   /* hairline dark grid */
+
+  --text-ink: #FFFFFF;
+  --text-muted: #9E9E9E;
 }
 
 @layer base {
   html {
     background-color: rgb(var(--surface-950));
-    color: #111827;
+    color: var(--text-ink);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  html.dark {
-    color: #F3F4F6;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 
   ::selection {
-    background: rgba(16, 185, 129, 0.22);
-    color: currentColor;
+    background: #EB4618;
+    color: #FFFFFF;
   }
 }
 
-/* Subtle engineering grid backdrop */
-.bg-telemetry-grid {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+/* Swiss Hairline Grid Lines */
+.grid-hairline {
+  border-color: rgba(226, 226, 224, 0.9);
+}
+html.dark .grid-hairline {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
-html.dark .bg-telemetry-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+/* Crosshair Markers (+) */
+.crosshair-corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  line-height: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8A8A8A;
+  user-select: none;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crosshair-tl { top: -5px; left: -5px; }
+.crosshair-tr { top: -5px; right: -5px; }
+.crosshair-bl { bottom: -5px; left: -5px; }
+.crosshair-br { bottom: -5px; right: -5px; }
+
+/* Expanding Orange Square CTA Button */
+.btn-expanding-orange {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #D4D4D4;
+  background-color: transparent;
+  color: #111111;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.4rem 0.4rem 1.15rem;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 260ms var(--ease-swiss), color 260ms var(--ease-swiss);
+}
+html.dark .btn-expanding-orange {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
 }
 
-/* Tactile Pressable Button Physics (160ms ease-out, scale 0.97 on active) */
+.btn-expanding-orange .btn-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #EB4618;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 320ms var(--ease-swiss);
+  z-index: 1;
+}
+
+.btn-expanding-orange:hover .btn-slide-bg {
+  transform: scaleX(1);
+}
+
+.btn-expanding-orange .btn-label {
+  position: relative;
+  z-index: 2;
+  transition: color 220ms ease;
+}
+
+.btn-expanding-orange:hover .btn-label {
+  color: #FFFFFF !important;
+}
+
+.btn-expanding-orange .btn-icon-square {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  background-color: #EB4618;
+  color: #FFFFFF;
+  border-radius: 2px;
+  margin-left: 0.85rem;
+  transition: background-color 220ms ease, color 220ms ease, transform 240ms var(--ease-swiss);
+}
+
+.btn-expanding-orange:hover .btn-icon-square {
+  background-color: #FFFFFF;
+  color: #EB4618;
+  transform: translateX(1px);
+}
+
+/* Section Pill Badges: light gray pill with orange star ✦ */
+.section-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #EAEAE8;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111111;
+}
+html.dark .section-pill-badge {
+  background-color: #1C1C1C;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #E5E5E5;
+}
+.section-pill-star {
+  color: #EB4618;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+/* Giant Display Titles */
+.giant-display-title {
+  font-size: clamp(3.75rem, 11vw, 9.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+/* Section Headings with Dual-Tone Split */
+.section-heading-split {
+  font-size: clamp(2.2rem, 5vw, 4.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+/* Scroll Blur-to-Clear Text Reveal */
+.blur-reveal-target {
+  filter: blur(8px);
+  opacity: 0.35;
+  transition: filter 600ms var(--ease-swiss), opacity 600ms var(--ease-swiss);
+  will-change: filter, opacity;
+}
+.blur-reveal-active {
+  filter: blur(0px);
+  opacity: 1;
+}
+
+/* Infinite Horizontal Marquee */
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-strip {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.animate-marquee-strip:hover {
+  animation-play-state: paused;
+}
+
+/* 8-point Radial Asterisk Rotating Animation */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Swiss Polaroid Project Card Frame */
+.swiss-card-frame {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E3;
+  padding: 12px;
+  position: relative;
+  transition: transform 240ms var(--ease-swiss), border-color 240ms var(--ease-swiss), box-shadow 240ms var(--ease-swiss);
+}
+html.dark .swiss-card-frame {
+  background-color: #161616;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.swiss-card-frame:hover {
+  transform: translateY(-3px);
+  border-color: #EB4618;
+  box-shadow: 0 12px 30px -8px rgba(235, 70, 24, 0.12);
+}
+
+/* Sticky Card Stacking on /service */
+.sticky-card-item {
+  position: sticky;
+  top: 5.5rem;
+  transition: transform 200ms ease;
+}
+
+/* Tactile Click Physics */
 .tactile-btn {
-  transition:
-    transform 160ms var(--ease-out-strong),
-    background-color 160ms var(--ease-out-strong),
-    border-color 160ms var(--ease-out-strong),
-    color 160ms var(--ease-out-strong);
-  will-change: transform;
+  transition: transform 120ms var(--ease-swiss);
 }
-
 .tactile-btn:active {
   transform: scale(0.97);
 }
 
-/* Project Card Hover Physics - Only activates on fine pointer devices (no sticky mobile hover) */
-.project-card {
-  transition:
-    transform 220ms var(--ease-out-strong),
-    border-color 220ms var(--ease-out-strong),
-    background-color 220ms var(--ease-out-strong);
+/* Slide-out Drawer Panel */
+.drawer-full-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(20, 14, 12, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .project-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 0, 0, 0.16);
-  }
-  html.dark .project-card:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-  }
-}
-
-.project-card:active {
-  transform: scale(0.985);
-}
-
-/* Interactive Surface Hover Physics for telemetry cards */
-.interactive-card {
-  transition:
-    transform 200ms var(--ease-out),
-    border-color 200ms var(--ease-out),
-    background-color 200ms var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .interactive-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 0, 0, 0.14);
-    background-color: rgba(255, 255, 255, 0.95);
-  }
-  html.dark .interactive-card:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    background-color: rgba(18, 20, 24, 0.85);
-  }
-}
-
-.interactive-card:active {
-  transform: scale(0.985);
-}
-
-/* Vaul-inspired Slide-over Sheet & Backdrop */
-.drawer-backdrop {
-  transition: opacity 280ms var(--ease-drawer);
-}
-
-.drawer-panel {
-  transition:
-    transform 360ms var(--ease-drawer),
-    opacity 280ms var(--ease-drawer);
-  will-change: transform;
-}
-
-/* Staggered entry on initial page load */
-.stagger-item {
+/* Universal Scroll Reveal Animation Engine */
+.reveal-on-scroll {
   opacity: 0;
-  transform: translateY(8px);
-  animation: staggerFadeIn 320ms var(--ease-out-strong) forwards;
-}
-
-.stagger-1 { animation-delay: 0ms; }
-.stagger-2 { animation-delay: 45ms; }
-.stagger-3 { animation-delay: 90ms; }
-.stagger-4 { animation-delay: 135ms; }
-.stagger-5 { animation-delay: 180ms; }
-.stagger-6 { animation-delay: 225ms; }
-
-@keyframes staggerFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Project Filter Card Entrance Animation */
-.card-filter-enter {
-  opacity: 0;
-  transform: translateY(6px);
-  animation: cardFadeIn 240ms var(--ease-out) forwards;
-}
-
-@keyframes cardFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Pipeline Step Stagger Entrance inside Drawer */
-.drawer-step-enter {
-  opacity: 0;
-  transform: translateY(4px);
-  animation: cardFadeIn 240ms var(--ease-out) forwards;
-}
-
-/* Floating Sonner-Style Toast Notification */
-.toast-surface {
-  opacity: 0;
-  transform: translateY(12px) scale(0.96);
+  transform: translateY(28px);
+  filter: blur(4px);
   transition:
-    opacity 260ms ease,
-    transform 260ms ease;
-  will-change: transform, opacity;
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 
-.toast-surface[data-visible="true"] {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+.reveal-on-scroll.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  filter: blur(0px) !important;
 }
 
-/* Accessibility: Respect Reduced Motion */
+/* Stagger delay classes */
+.delay-1 { transition-delay: 60ms; }
+.delay-2 { transition-delay: 130ms; }
+.delay-3 { transition-delay: 200ms; }
+.delay-4 { transition-delay: 270ms; }
+.delay-5 { transition-delay: 340ms; }
+.delay-6 { transition-delay: 410ms; }
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .tactile-btn,
-  .project-card,
-  .interactive-card,
-  .drawer-panel,
-  .drawer-backdrop,
-  .stagger-item,
-  .card-filter-enter,
-  .drawer-step-enter,
-  .toast-surface {
-    transition: opacity 150ms ease !important;
+  .animate-marquee-strip,
+  .animate-spin-slow,
+  .btn-expanding-orange .btn-slide-bg,
+  .blur-reveal-target {
     animation: none !important;
+    transition: none !important;
     transform: none !important;
+    filter: none !important;
     opacity: 1 !important;
   }
 }

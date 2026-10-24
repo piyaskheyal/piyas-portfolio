@@ -1,0 +1,32 @@
+---
+import { SITE_CONFIG } from '../config/site';
+
+const marqueeItems = [
+  ...SITE_CONFIG.toolchains,
+  ...SITE_CONFIG.toolchains,
+];
+---
+
+<div class="border-y border-stone-200 dark:border-white/10 bg-white dark:bg-[#111111] py-4 transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col md:flex-row items-center gap-6 overflow-hidden">
+    <!-- Left Static Label -->
+    <div class="shrink-0 flex items-center gap-2 pr-6 border-b md:border-b-0 md:border-r border-stone-200 dark:border-white/10 pb-3 md:pb-0">
+      <span class="h-2 w-2 rounded-full bg-[#EB4618]"></span>
+      <span class="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white whitespace-nowrap">
+        TRUSTED TOOLCHAINS &amp; ENGINES
+      </span>
+    </div>
+
+    <!-- Right Infinite Horizontal Marquee -->
+    <div class="w-full overflow-hidden whitespace-nowrap py-1">
+      <div class="animate-marquee-strip flex items-center gap-8 sm:gap-12">
+        {marqueeItems.map((item) => (
+          <div class="flex items-center gap-8 sm:gap-12 text-zinc-600 dark:text-zinc-400 font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider hover:text-[#EB4618] transition-colors">
+            <span>{item}</span>
+            <span class="text-stone-300 dark:text-zinc-700 select-none">✦</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+---
+import ScrollBlurReveal from './ScrollBlurReveal';
+import AnimatedCounter from './AnimatedCounter';
+import { Star, Zap } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section id="bento" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- Header -->
+    <div class="reveal-on-scroll space-y-4 mb-16">
+      <div class="section-pill-badge">
+        <span class="section-pill-star">✦</span>
+        <span>WHY COLLABORATE WITH PIYAS</span>
+      </div>
+
+      <ScrollBlurReveal
+        client:visible
+        primaryText="FOCUSED ON ENGINEERING"
+        blurredText="THAT DELIVERS REAL RESULTS."
+      />
+    </div>
+
+    <!-- 3-Column Bento Grid -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+      <!-- Col 1 (4 cols): 2 Stacked White Cards -->
+      <div class="reveal-on-scroll delay-1 flex flex-col gap-6 lg:col-span-4">
+        <!-- Top Card -->
+        <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-8 shadow-sm transition-all hover:border-[#EB4618]">
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+          <span class="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#EB4618]">
+            <span>✦</span> MECHATRONICS &amp; SIM YEARS
+          </span>
+          <div class="mt-4 font-extrabold text-6xl sm:text-7xl text-zinc-950 dark:text-white tracking-tighter">
+            <AnimatedCounter client:visible value={SITE_CONFIG.metrics.yearsExp} />
+          </div>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Hands-on hardware fabrication, CAD modeling, and GPU accelerated simulation across academic and industrial platforms.
+          </p>
+        </div>
+
+        <!-- Bottom Card -->
+        <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-8 shadow-sm transition-all hover:border-[#EB4618]">
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+          <span class="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#EB4618]">
+            <span>✦</span> POLICY CONVERGENCE RATE
+          </span>
+          <div class="mt-4 font-extrabold text-6xl sm:text-7xl text-[#EB4618] tracking-tighter">
+            <AnimatedCounter client:visible value={SITE_CONFIG.metrics.policyConvergence} />
+          </div>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Tightly constrained reward formulations avoiding local minima in bipedal stabilization and robotic arm inverse kinematics.
+          </p>
+        </div>
+      </div>
+
+      <!-- Col 2 (4 cols): 1 Tall Combined Card -->
+      <div class="reveal-on-scroll delay-2 relative lg:col-span-4 flex flex-col rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] overflow-hidden shadow-sm transition-all hover:border-[#EB4618]">
+        <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+        <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+        <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+        <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+        <!-- Top 65%: Motion-blurred profile portrait -->
+        <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-zinc-950">
+          <img
+            src={SITE_CONFIG.avatar}
+            alt={SITE_CONFIG.name}
+            class="h-full w-full object-cover object-top filter contrast-110"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+          <!-- Overlaid Pill Badge -->
+          <div class="absolute bottom-4 left-4 right-4 rounded-full border border-white/20 bg-white/90 dark:bg-black/80 px-3.5 py-1.5 backdrop-blur-md flex items-center justify-between text-xs font-mono">
+            <span class="flex items-center gap-1.5 text-zinc-900 dark:text-white font-bold">
+              <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              12+ Active Rigs
+            </span>
+            <span class="text-[#EB4618] font-bold">100% Tested</span>
+          </div>
+        </div>
+
+        <!-- Bottom 35%: Recommendation Quote -->
+        <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
+          <div class="flex items-center gap-1 text-[#EB4618] mb-3">
+            {[...Array(5)].map(() => (
+              <Star className="h-4 w-4 fill-current" />
+            ))}
+            <span class="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300 ml-1">5.0 / 5.0</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 italic leading-relaxed">
+            "{SITE_CONFIG.testimonials[0].quote}"
+          </p>
+
+          <div class="mt-4 pt-3 border-t border-stone-200 dark:border-white/10 flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full overflow-hidden bg-zinc-200">
+              <img src={SITE_CONFIG.avatar} alt="Author" class="h-full w-full object-cover" />
+            </div>
+            <div>
+              <span class="block text-xs font-bold text-zinc-950 dark:text-white">
+                {SITE_CONFIG.testimonials[0].author}
+              </span>
+              <span class="block text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
+                {SITE_CONFIG.testimonials[0].role}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 3 (4 cols): 2 Stacked Cards -->
+      <div class="reveal-on-scroll delay-3 flex flex-col gap-6 lg:col-span-4">
+        <!-- Top Card: Hardware / Simulation graphic tile -->
+        <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-gradient-to-br from-[#EB4618] to-[#C8320A] p-6 text-white overflow-hidden shadow-sm">
+          <span class="crosshair-corner crosshair-tl text-white/50">+</span>
+          <span class="crosshair-corner crosshair-tr text-white/50">+</span>
+          <span class="crosshair-corner crosshair-bl text-white/50">+</span>
+          <span class="crosshair-corner crosshair-br text-white/50">+</span>
+
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-white/80">
+            COMPUTE &amp; COMPILER SUITE
+          </span>
+          <h4 class="mt-3 text-2xl font-extrabold uppercase leading-tight text-white">
+            NVIDIA ISAAC SIM + JETSON ORIN EDGE
+          </h4>
+          <p class="mt-2 text-xs font-mono text-white/80">
+            Realtime PhysX 5.4 GPU solver with microsecond CUDA kernels.
+          </p>
+        </div>
+
+        <!-- Bottom Card: Fast & Deterministic -->
+        <div class="relative flex-1 rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-8 shadow-sm transition-all hover:border-[#EB4618]">
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+          <div class="flex items-center gap-2 text-[#EB4618]">
+            <Zap className="h-5 w-5 fill-current" />
+            <span class="font-mono text-xs font-bold uppercase tracking-wider">
+              FAST &amp; DETERMINISTIC
+            </span>
+          </div>
+
+          <h4 class="mt-3 text-xl font-extrabold uppercase text-zinc-950 dark:text-white">
+            REALTIME CONTROL LOOPS
+          </h4>
+
+          <p class="mt-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Zero-allocation memory models and RTOS thread priorities ensuring 1000Hz motor control loop consistency with zero jitter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

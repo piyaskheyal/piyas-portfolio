@@ -2,16 +2,24 @@
 import { getCollection } from 'astro:content';
 import '../styles/global.css';
 import { SITE_CONFIG } from '../config/site';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import ProjectExplorer from '../components/ProjectExplorer';
+import HeaderBar from '../components/HeaderBar.astro';
+import SwissHero from '../components/SwissHero.astro';
+import MarqueeStrip from '../components/MarqueeStrip.astro';
+import ImpactMetrics from '../components/ImpactMetrics.astro';
+import ServiceList from '../components/ServiceList.astro';
+import SelectedProjects from '../components/SelectedProjects.astro';
+import EngineeringProcess from '../components/EngineeringProcess.astro';
+import BentoShowcase from '../components/BentoShowcase.astro';
+import TestimonialStrip from '../components/TestimonialStrip.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import ContactBanner from '../components/ContactBanner.astro';
+import SwissFooter from '../components/SwissFooter.astro';
 import CommandMenu from '../components/CommandMenu';
-import Footer from '../components/Footer.astro';
+import ScrollRevealEngine from '../components/ScrollRevealEngine.astro';
 
 const rawProjects = await getCollection('projects');
 const sortedProjects = rawProjects.sort((a, b) => a.data.order - b.data.order);
 
-// Pre-render markdown body into HTML for the interactive slide-over inspector drawer
 const projectsForClient = await Promise.all(
   sortedProjects.map(async (entry) => {
     return {
@@ -47,18 +55,16 @@ const projectsForClient = await Promise.all(
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Default to Light Mode as explicitly requested -->
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');
         }
-        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return 'light';
-        }
-        return 'dark';
+        return 'light'; // Default is Light Mode!
       })();
       if (theme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -67,149 +73,49 @@ const projectsForClient = await Promise.all(
       }
     </script>
   </head>
-  <body class="bg-surface-950 bg-telemetry-grid min-h-screen text-zinc-900 dark:text-zinc-100 antialiased selection:bg-emerald-500/20">
-    <Header />
+  <body class="bg-[#F6F6F4] dark:bg-[#0F0F0F] text-zinc-900 dark:text-zinc-100 antialiased font-sans transition-colors selection:bg-[#EB4618] selection:text-white">
+    <!-- Solid Vermilion Sticky Header Bar with Slide-Out Drawer -->
+    <HeaderBar currentPath="/" />
 
     <main>
-      <Hero />
+      <!-- Swiss Hero Section -->
+      <SwissHero />
 
-      <!-- Projects & Interactive Inspector Drawer Section -->
-      <section id="projects" class="py-16 md:py-24">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-10">
-            <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              01 // SYSTEMS & RESEARCH PROJECTS
-            </span>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
-              Selected Embodied AI & Robotics Work
-            </h2>
-            <p class="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-              Select any card below to slide open the Technical Inspector with system architecture, telemetry specs, and launch commands.
-            </p>
-          </div>
+      <!-- Marquee Strip of Tools & Engines -->
+      <MarqueeStrip />
 
-          <ProjectExplorer client:load projects={projectsForClient} />
-        </div>
-      </section>
+      <!-- Impact & Metrics Section -->
+      <ImpactMetrics />
 
-      <!-- Experience & Research Journey Section -->
-      <section id="experience" class="border-t border-black/[0.06] dark:border-white/[0.07] py-16 md:py-24">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-10">
-            <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              02 // RESEARCH & WORK TIMELINE
-            </span>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
-              Engineering Journey & Lab Experience
-            </h2>
-            <p class="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-              Hands-on research and software engineering across massively parallel RL, physical manipulation, and mobile autonomy.
-            </p>
-          </div>
+      <!-- Services & Core Engineering Disciplines -->
+      <ServiceList />
 
-          <div class="space-y-4">
-            {SITE_CONFIG.experience.map((item) => (
-              <div class="interactive-card rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-surface-900/90 dark:bg-surface-900/60 p-6 shadow-xs dark:shadow-none">
-                <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-                  <div>
-                    <span class="font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                      {item.period}
-                    </span>
-                    <h3 class="mt-1 text-lg font-semibold text-zinc-900 dark:text-white">
-                      {item.role}
-                    </h3>
-                    <p class="font-mono text-xs text-zinc-500 dark:text-zinc-400">
-                      {item.lab}
-                    </p>
-                  </div>
-                  <div class="flex flex-wrap gap-1.5 pt-2 sm:pt-0">
-                    {item.technologies.map((t) => (
-                      <span class="rounded border border-black/[0.06] dark:border-white/10 bg-surface-800 px-2.5 py-1 font-mono text-[11px] text-zinc-700 dark:text-zinc-300">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <!-- Selected Research Works & Interactive Inspector Drawer -->
+      <SelectedProjects projects={projectsForClient} />
 
-      <!-- Physical Lab & Hardware Rig Section -->
-      <section id="rig" class="border-t border-black/[0.06] dark:border-white/[0.07] py-16 md:py-24">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-10">
-            <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              03 // PHYSICAL RIG & LAB ARSENAL
-            </span>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
-              Hardware, Compute & Teleoperation Setup
-            </h2>
-            <p class="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-              The physical atoms, GPU clusters, and sensor suites powering simulation and real-world deployment.
-            </p>
-          </div>
+      <!-- 4-Step Engineering Process (Dark Cards) -->
+      <EngineeringProcess />
 
-          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {SITE_CONFIG.labGear.map((gear) => (
-              <div class="interactive-card flex flex-col justify-between rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-surface-900/90 dark:bg-surface-900/60 p-5 shadow-xs dark:shadow-none">
-                <div>
-                  <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-medium">
-                    {gear.category}
-                  </span>
-                  <h3 class="mt-2 text-base font-semibold text-zinc-900 dark:text-white">
-                    {gear.name}
-                  </h3>
-                  <p class="mt-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
-                    {gear.specs}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <!-- Why Choose Me Bento Grid -->
+      <BentoShowcase />
 
-      <!-- Modular Technical Stack Matrix -->
-      <section id="architecture" class="border-t border-black/[0.06] dark:border-white/[0.07] py-16 md:py-24">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-10">
-            <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              04 // TECHNICAL CAPABILITIES
-            </span>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
-              Simulation, Middleware & Hardware Stack
-            </h2>
-          </div>
+      <!-- Peer Recommendations & Testimonials Strip -->
+      <TestimonialStrip />
 
-          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {SITE_CONFIG.stack.map((group) => (
-              <div class="interactive-card rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-surface-900/90 dark:bg-surface-900/60 p-5 shadow-xs dark:shadow-none">
-                <h3 class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-                  {group.category}
-                </h3>
-                <ul class="mt-4 space-y-2.5">
-                  {group.items.map((item) => (
-                    <li class="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-200">
-                      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <!-- Latest Research & Design Insights (Blog Preview) -->
+      <BlogPreview />
+
+      <!-- Global Contact Banner -->
+      <ContactBanner />
     </main>
 
-    <Footer />
+    <!-- Global Swiss Footer -->
+    <SwissFooter />
 
-    <!-- Instant 0ms Command Menu (⌘K) -->
+    <!-- Universal Scroll Reveal Animation Engine -->
+    <ScrollRevealEngine />
+
+    <!-- 0ms Command Palette (⌘K) -->
     <CommandMenu
       client:load
       projects={projectsForClient.map((p) => ({

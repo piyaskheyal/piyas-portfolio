@@ -1,0 +1,123 @@
+---
+import ScrollBlurReveal from './ScrollBlurReveal';
+import AnimatedCounter from './AnimatedCounter';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section id="impact" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- Top Row -->
+    <div class="reveal-on-scroll grid grid-cols-1 gap-8 lg:grid-cols-12 items-center pb-12 border-b border-stone-200 dark:border-white/10">
+      <!-- Left Pill & Split Heading -->
+      <div class="lg:col-span-8 space-y-4">
+        <div class="section-pill-badge">
+          <span class="section-pill-star">✦</span>
+          <span>PHYSICAL AI &amp; ROBOTICS IMPACT</span>
+        </div>
+
+        <ScrollBlurReveal
+          client:visible
+          primaryText="MY IMPACT THROUGH RIGOROUS"
+          blurredText="SIMULATION & REAL HARDWARE."
+        />
+      </div>
+
+      <!-- Center-Right Rotating 8-point Radial Asterisk -->
+      <div class="lg:col-span-2 flex justify-center">
+        <div class="animate-spin-slow text-stone-300 dark:text-zinc-700 text-6xl select-none font-mono">
+          ✱
+        </div>
+      </div>
+
+      <!-- Far Right Duotone Motion Portrait Frame -->
+      <div class="lg:col-span-2 flex justify-end">
+        <div class="relative h-28 w-28 overflow-hidden rounded-lg border border-stone-300 dark:border-white/15 bg-zinc-900 shadow-md">
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+          <img
+            src={SITE_CONFIG.avatar}
+            alt={SITE_CONFIG.name}
+            class="h-full w-full object-cover filter contrast-125 saturate-150 mix-blend-luminosity"
+          />
+          <div class="absolute inset-0 bg-[#EB4618]/30 mix-blend-color"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+      <!-- Left Column: Larger Framed Profile Portrait with + corner markers -->
+      <div class="reveal-on-scroll delay-1 lg:col-span-5">
+        <div class="relative rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-3 shadow-lg">
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+          <div class="relative overflow-hidden rounded-xl bg-zinc-950">
+            <img
+              src={SITE_CONFIG.avatar}
+              alt={SITE_CONFIG.name}
+              class="h-72 sm:h-96 w-full object-cover object-top filter contrast-105"
+            />
+            <div class="absolute bottom-3 left-3 rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-white backdrop-blur-md">
+              LAB // SYSTEM IDENTIFICATION
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Uppercase Bio & 2-Row Bordered Table with Animated Counters -->
+      <div class="reveal-on-scroll delay-2 lg:col-span-7 space-y-8">
+        <p class="text-base sm:text-xl font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-100 leading-snug">
+          "HI, I'M PIYAS, A ROBOTICS &amp; SIMULATION ENGINEER PASSIONATE ABOUT CLOSING THE SIM-TO-REAL GAP, TRAINING EMBODIED VISION-LANGUAGE-ACTION POLICIES, AND DESIGNING SUB-MILLISECOND DETERMINISTIC EMBEDDED CONTROL SYSTEMS."
+        </p>
+
+        <!-- 2-Row Bordered Metric Table -->
+        <div class="divide-y divide-stone-200 dark:divide-white/10 border-y border-stone-200 dark:border-white/10">
+          <!-- Row 1 -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 items-center py-6 gap-4">
+            <div class="sm:col-span-4">
+              <span class="font-extrabold text-5xl sm:text-6xl text-zinc-950 dark:text-white tracking-tighter">
+                <AnimatedCounter client:visible value={SITE_CONFIG.metrics.rigsCompleted} />
+              </span>
+            </div>
+            <div class="sm:col-span-8 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[#EB4618] font-bold">✦</span>
+                <span class="font-mono text-xs uppercase tracking-wider text-zinc-900 dark:text-white font-bold">
+                  ROBOTIC RIGS &amp; DEMOS COMPLETED
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                End-to-end engineered physical setups including the SO-101 6-DoF arm teleoperation rig, mobile robot chassis, and custom sensor brackets.
+              </p>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 items-center py-6 gap-4">
+            <div class="sm:col-span-4">
+              <span class="font-extrabold text-5xl sm:text-6xl text-[#EB4618] tracking-tighter">
+                <AnimatedCounter client:visible value={SITE_CONFIG.metrics.simHours} />
+              </span>
+            </div>
+            <div class="sm:col-span-8 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[#EB4618] font-bold">✦</span>
+                <span class="font-mono text-xs uppercase tracking-wider text-zinc-900 dark:text-white font-bold">
+                  SIMULATION TRAINING HOURS
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                Massively parallel GPU environments in NVIDIA Isaac Sim &amp; Isaac Lab exploring domain randomization bounds for robust zero-shot deployment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

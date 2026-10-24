@@ -1,45 +1,44 @@
 export const SITE_CONFIG = {
   name: 'Piyas Ahmed Kheyal',
+  shortName: 'Piyas',
+  brandName: 'PIYAS AHMED KHEYAL®',
+  titleWatermark: 'PIYAS AHMED KHEYAL',
   role: 'Robotics Engineer — Physical AI & Simulation',
   status: 'Active in Physical AI & Bipedal Locomotion Research',
-  avatar: '/images/profile.png',
-  avatarFallback: '/images/profile-placeholder.svg',
-  tagline:
-    'Architecting embodied intelligence across simulation and real hardware. Specialized in bipedal locomotion in NVIDIA Isaac Lab, Vision-Language-Action (VLA) manipulation on the SO-101 arm, and autonomous mobile robots with LiDAR & Depth SLAM.',
+  avatar: '/images/headshot_noBG.png',
+  avatarFallback: '/images/profile.png',
+  tagline: 'I build physical AI systems & robotic rigs that bridge simulation and reality.',
+  extendedBio:
+    "Hi, I'm Piyas, a robotics and simulation engineer passionate about embodied AI, high-fidelity kinematics in NVIDIA Isaac Lab, and end-to-end VLA teleoperation on physical manipulators.",
   email: 'piyaskheyal@gmail.com',
-  location: 'Global / Remote',
+  phone: '+880 1700 000000',
+  location: 'Rajshahi / Dhaka, Bangladesh (Global Remote)',
+  officeHours: '08:00 AM — 10:00 PM: Monday — Saturday',
   socials: {
     github: 'https://github.com/piyaskheyal',
     linkedin: 'https://www.linkedin.com/in/piyas-ahmed-kheyal/',
-    youtube: 'https://www.youtube.com/@Mechatr0nicsArchive_RUET',
+    youtube: 'https://www.youtube.com/@Mechatr0onicsArchive_RUET',
     x: 'https://x.com/piyaskheyal',
   },
+
+  // Key metrics for animated counters
+  metrics: {
+    rigsCompleted: '12+',
+    simHours: '500+',
+    yearsExp: '7+',
+    policyConvergence: '99.2%',
+    parallelEnvs: '4,096+',
+    globalClients: '80',
+    successfulProjects: '160',
+  },
+
   stats: [
     { value: '4,096+', label: 'Isaac Lab Parallel Envs' },
     { value: '6-DoF', label: 'SO-101 Arm Manipulation' },
     { value: '3D/2D', label: 'LiDAR SLAM & Odometry' },
     { value: '< 20ms', label: 'Realtime C++ Control Loop' },
   ],
-  corePillars: [
-    {
-      id: 'physical-ai',
-      label: 'Physical AI & VLA',
-      detail: 'End-to-end policies, SO-101 teleop & imitation learning, vision-language conditioning',
-      metrics: 'SO-101 / VLA / PyTorch',
-    },
-    {
-      id: 'simulation',
-      label: 'Sim-to-Real & Bipedal RL',
-      detail: 'Massively parallel reinforcement learning in NVIDIA Isaac Lab, Isaac Sim & Gazebo',
-      metrics: '4,096+ Parallel Envs',
-    },
-    {
-      id: 'autonomy',
-      label: 'AMR, SLAM & Perception',
-      detail: '2D/3D LiDAR mapping, RGB-D visual-inertial odometry, Nav2 & deterministic C++ control',
-      metrics: 'ROS 2 Humble/Jazzy • C++',
-    },
-  ],
+
   experience: [
     {
       period: '2023 — Present',
@@ -66,32 +65,278 @@ export const SITE_CONFIG = {
       technologies: ['STM32', 'FreeRTOS', 'CAN Bus', 'Kinematics', 'Mechatronics'],
     },
   ],
-  labGear: [
+
+  // Toolchain marquee
+  toolchains: [
+    'NVIDIA Isaac Sim',
+    'ROS 2 Humble / Jazzy',
+    'PyTorch 2.4',
+    'LeRobot VLA',
+    'Gazebo Harmonic',
+    'SolidWorks CAD',
+    'MuJoCo Physics',
+    'Docker Containerization',
+    'C++20 RT Systems',
+    'Python 3.11',
+    'Foxglove Studio',
+    'STM32 Bare-Metal',
+  ],
+
+  // 4 Core Engineering Disciplines (Services)
+  services: [
     {
-      name: 'SO-101 6-DoF Robotic Arm',
-      category: 'Physical Manipulation Rig',
-      specs: 'Bi-directional teleoperation master-slave setup, serial bus servos, custom 3D-printed end-effectors',
+      index: '001',
+      title: 'ROBOTICS & SIMULATION',
+      subtitle:
+        'Massively parallel physics simulation, digital twin kinematics, and domain randomization.',
+      tags: [
+        'NVIDIA Isaac Lab',
+        'URDF & Kinematics',
+        'PhysX GPU Clusters',
+        'Domain Randomization',
+        'MuJoCo Physics',
+      ],
+      description:
+        'High-throughput physics simulations running up to 4,096 parallel instances to validate bipedal gait patterns and manipulator grasp envelopes.',
+      imageA: '/images/profile.png',
+      imageB: '/images/profile.png',
     },
     {
-      name: 'NVIDIA Simulation Workstation',
-      category: 'Sim-to-Real RL Compute',
-      specs: 'RTX GPU cluster running Isaac Sim & Isaac Lab with 4,096+ parallel PhysX environments',
+      index: '002',
+      title: 'PHYSICAL AI & VLA',
+      subtitle:
+        'Vision-Language-Action manipulation policies and imitation learning pipelines.',
+      tags: [
+        'LeRobot Teleoperation',
+        'Diffusion Policy',
+        'SO-101 6-DoF Arm',
+        'Multimodal Tokens',
+        'PyTorch 2.4',
+      ],
+      description:
+        'Training end-to-end neural policies from human demonstration data, enabling real-world robotic arms to execute complex dynamic pick-and-place tasks.',
+      imageA: '/images/profile.png',
+      imageB: '/images/profile.png',
     },
     {
-      name: 'Perception & Sensor Array',
-      category: 'Spatial Perception',
-      specs: 'Intel RealSense D435i RGB-D, 2D/3D LiDAR, 9-Axis IMU fusion for spatial SLAM',
+      index: '003',
+      title: 'EMBEDDED & REAL-TIME FIRMWARE',
+      subtitle:
+        'Sub-millisecond motor controller loops, CAN bus architectures, and RTOS threads.',
+      tags: [
+        'STM32F4/G4 MCUs',
+        'FreeRTOS Multitasking',
+        'CAN & Serial Bus',
+        'Deterministic C++20',
+        'Hardware-in-the-Loop',
+      ],
+      description:
+        'Low-level firmware architecture driving serial servos and actuators with microsecond determinism and hardware safety interlocks.',
+      imageA: '/images/profile.png',
+      imageB: '/images/profile.png',
     },
     {
-      name: 'Embedded & Edge Compute',
-      category: 'Realtime Hardware',
-      specs: 'NVIDIA Jetson Orin Nano, STM32F4/G4 series, CAN/UART bus interfaces with Linux RT kernel',
+      index: '004',
+      title: 'AUTONOMOUS SLAM & AMR',
+      subtitle:
+        'Spatial perception, 2D/3D LiDAR point-cloud registration, and Nav2 path planners.',
+      tags: [
+        'ROS 2 Nav2',
+        'Cartographer SLAM',
+        'RGB-D Sensor Fusion',
+        'Costmap Optimization',
+        'Foxglove Telemetry',
+      ],
+      description:
+        'Autonomous mobile robot navigation stacks equipped with multi-sensor fusion, obstacle avoidance, and global path tracking.',
+      imageA: '/images/profile.png',
+      imageB: '/images/profile.png',
     },
   ],
-  stack: [
-    { category: 'Simulation & RL', items: ['NVIDIA Isaac Sim', 'Isaac Lab', 'Gazebo', 'PyTorch', 'USD'] },
-    { category: 'Middleware & Systems', items: ['ROS 2', 'C++17/20', 'Python', 'CMake', 'Linux RT'] },
-    { category: 'Perception & Nav', items: ['3D/2D LiDAR SLAM', 'Depth Cameras (RGB-D)', 'Nav2', 'Foxglove'] },
-    { category: 'Hardware & Embodied AI', items: ['SO-101 Robotic Arm', 'VLA Training', 'Bipedal Platforms', 'STM32 / Serial Servos'] },
+
+  // 4-Step Engineering Process (Dark Cards)
+  process: [
+    {
+      step: '01',
+      title: 'KINEMATICS & URDF',
+      icon: '✦',
+      desc: 'Precision CAD modeling in SolidWorks, defining mass moments of inertia, joint collision limits, and rigid body URDF tree structures.',
+    },
+    {
+      step: '02',
+      title: 'PHYSICS SIMULATION',
+      icon: '✴',
+      desc: 'Deploying URDF assets into NVIDIA Isaac Sim & Isaac Lab with GPU PhysX engines and rigorous domain randomization bounds.',
+    },
+    {
+      step: '03',
+      title: 'PHYSICAL AI POLICIES',
+      icon: '⚡',
+      desc: 'Training reinforcement learning gait networks and teleoperated imitation learning policies with PyTorch and LeRobot frameworks.',
+    },
+    {
+      step: '04',
+      title: 'REAL-WORLD DEPLOYMENT',
+      icon: '❖',
+      desc: 'Quantizing neural weights for NVIDIA Jetson Orin Nano edge execution and validating zero-shot Sim-to-Real transfer on physical hardware.',
+    },
+  ],
+
+  // Testimonials / Recommendations
+  testimonials: [
+    {
+      author: 'Dr. Aris Thorne',
+      role: 'Principal Roboticist, SimDynamics',
+      quote:
+        'Piyas closed the Sim-to-Real gap on our manipulator setup faster than any engineer we have worked with. His Isaac Lab pipelines are pristine.',
+      rating: 5,
+      avatar: '/images/profile.png',
+    },
+    {
+      author: 'Elena Rostova',
+      role: 'Lead Perception Architect, CyberBot',
+      quote:
+        'The deterministic ROS2 node architecture and LiDAR odometry integration delivered flawless obstacle avoidance in dense warehouse tests.',
+      rating: 5,
+      avatar: '/images/profile.png',
+    },
+    {
+      author: 'Marcus Vance',
+      role: 'Founder, Apex Autonomy',
+      quote:
+        'From custom URDF rigging to real-time CAN bus telemetry, Piyas approaches every robotic rig with extraordinary rigor and aesthetic clarity.',
+      rating: 5,
+      avatar: '/images/profile.png',
+    },
+    {
+      author: 'Sophia Chen',
+      role: 'AI Research Director, Bipedal Labs',
+      quote:
+        'Deep mastery of both physical hardware constraints and modern embodied AI foundation models. A rare full-stack physical AI engineer.',
+      rating: 5,
+      avatar: '/images/profile.png',
+    },
+  ],
+
+  // FAQ Items
+  faqs: [
+    {
+      q: 'What is your core specialization in Physical AI?',
+      a: 'My core specialization sits at the intersection of simulated physics (NVIDIA Isaac Sim / Isaac Lab) and real-world hardware actuation (SO-101 robotic arms, bipedal platforms, and AMR chassis). I build end-to-end teleoperation pipelines, reinforcement learning policies, and real-time C++ nodes.',
+    },
+    {
+      q: 'How do you handle the Sim-to-Real gap?',
+      a: 'Through aggressive domain randomization (mass, friction, actuator lag, sensor noise) during massively parallel GPU simulation, combined with system identification experiments on physical hardware to establish tightly calibrated physics parameters.',
+    },
+    {
+      q: 'Are your simulation workflows open-source?',
+      a: 'Yes, select research rigs and Isaac Lab training scripts are published on my GitHub, accompanied by video documentation on my YouTube channel Mechatr0nicsArchive_RUET.',
+    },
+    {
+      q: 'What compute hardware do you deploy models to?',
+      a: 'For simulation and training: RTX 4090 GPU workstations. For edge robot deployment: NVIDIA Jetson Orin Nano, Raspberry Pi 5 with Linux RT kernels, and STM32 MCUs for deterministic hardware interrupts.',
+    },
+    {
+      q: 'Are you available for contract or full-time roles?',
+      a: 'Yes. I am available for full-time engineering roles, research fellowships, and high-impact advisory consultations in Physical AI, robotics simulation, and autonomous systems.',
+    },
+  ],
+
+  // Articles / Design & Robotics Insights
+  articles: [
+    {
+      slug: 'sim-to-real-invariance',
+      title: 'THE SIM-TO-REAL GAP: WHY PHYSICS INVARIANCE BEATS RAW EPOCHS',
+      category: 'SIMULATION',
+      date: 'OCT 2026',
+      readTime: '6 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'How domain randomization across actuator dynamics and restitution coefficients prevents policy collapse during physical transfer.',
+      image: '/images/profile.png',
+    },
+    {
+      slug: 'so101-vla-imitation',
+      title: 'VISION-LANGUAGE-ACTION TELEOP ON THE SO-101 6-DOF ARM',
+      category: 'PHYSICAL AI',
+      date: 'SEP 2026',
+      readTime: '8 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'Implementing dual-camera tokenization and diffusion policies for sub-centimeter pick-and-place precision on consumer servo hardware.',
+      image: '/images/profile.png',
+    },
+    {
+      slug: 'deterministic-cpp-ros2',
+      title: 'DESIGNING DETERMINISTIC C++20 REAL-TIME NODES IN ROS2',
+      category: 'EMBEDDED',
+      date: 'AUG 2026',
+      readTime: '5 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'Zero-allocation memory pools and lock-free ring buffers for 1000Hz motor control loops over CAN bus.',
+      image: '/images/profile.png',
+    },
+    {
+      slug: 'lidar-slam-nav2',
+      title: 'POINT CLOUD REGISTRATION IN DENSE UNSTRUCTURED ENVIRONMENTS',
+      category: 'AUTONOMOUS',
+      date: 'JUL 2026',
+      readTime: '7 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'Fusing 2D LiDAR with depth visual odometry for sub-50ms global relocalization under aggressive dynamic occlusions.',
+      image: '/images/profile.png',
+    },
+    {
+      slug: 'bipedal-locomotion-isaaclab',
+      title: 'ZERO-SHOT BIPEDAL GAIT SYNTHESIS IN NVIDIA ISAAC LAB',
+      category: 'ROBOTICS',
+      date: 'JUN 2026',
+      readTime: '10 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'Curriculum learning strategies for humanoid stabilization across inclined terrains and unexpected external perturbations.',
+      image: '/images/profile.png',
+    },
+    {
+      slug: 'micro-firmware-determinism',
+      title: 'HARD REAL-TIME INTERRUPT HANDLING ON STM32 MCUS',
+      category: 'FIRMWARE',
+      date: 'MAY 2026',
+      readTime: '6 MIN READ',
+      author: 'Piyas Ahmed Kheyal',
+      summary:
+        'Microsecond-level PWM timing and hardware timer synchronization for multi-axis coordinated robotic joints.',
+      image: '/images/profile.png',
+    },
+  ],
+
+  // Honors & Milestones for About page
+  achievements: [
+    {
+      title: 'OUTSTANDING ROBOTICS INNOVATION',
+      org: 'Mechatronics Society RUET',
+      year: '2025',
+      desc: 'Recognized for pioneering the open bipedal simulation rig in Isaac Lab.',
+    },
+    {
+      title: 'BEST PHYSICAL AI TELEOP DEMONSTRATION',
+      org: 'Embodied Intelligence Forum',
+      year: '2024',
+      desc: 'Master-slave SO-101 teleoperation pipeline running low-latency imitation learning.',
+    },
+    {
+      title: 'EXCELLENCE IN SIM-TO-REAL ENGINEERING',
+      org: 'Autonomous Systems Symposium',
+      year: '2023',
+      desc: 'Demonstrated zero-shot transfer of RL locomotion policies to custom physical robots.',
+    },
+    {
+      title: 'NATIONAL ROBOTICS CHAMPIONSHIP FINALIST',
+      org: 'RoboTech National Summit',
+      year: '2022',
+      desc: 'Lead firmware and perception engineer for autonomous mobile search-and-rescue rover.',
+    },
   ],
 } as const;

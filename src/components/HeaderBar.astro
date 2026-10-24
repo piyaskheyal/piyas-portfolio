@@ -1,0 +1,117 @@
+---
+import NavigationDrawer from './NavigationDrawer';
+import { SITE_CONFIG } from '../config/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { label: 'HOME', href: '/' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'SERVICES', href: '/service' },
+  { label: 'BLOGS', href: '/blog' },
+  { label: 'CONTACT', href: '/contact' },
+];
+---
+
+<header class="sticky top-0 z-50 w-full bg-[#EB4618] text-white shadow-md">
+  <div class="grid h-12 sm:h-14 w-full grid-cols-12 items-stretch border-b border-white/20">
+    <!-- Col 1: Wordmark (Wide) -->
+    <div class="col-span-6 sm:col-span-4 lg:col-span-3 flex items-center border-r border-white/20 px-4 sm:px-6">
+      <a href="/" class="flex items-center gap-2 group">
+        <span class="font-extrabold tracking-tight text-sm sm:text-base text-white group-hover:opacity-90 transition-opacity">
+          {SITE_CONFIG.brandName}
+        </span>
+        <span class="hidden md:inline font-mono text-[9px] uppercase tracking-wider text-white/70">
+          // ROBOTICS LAB
+        </span>
+      </a>
+    </div>
+
+    <!-- Center Columns: Desktop Nav Links -->
+    <nav class="hidden lg:col-span-6 lg:grid lg:grid-cols-5 items-stretch border-r border-white/20 divide-x divide-white/20 text-center">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href;
+        return (
+          <a
+            href={item.href}
+            class={`flex items-center justify-center font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
+              isActive
+                ? 'bg-black/15 text-white underline underline-offset-4 decoration-2 decoration-white'
+                : 'text-white/90 hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right Controls: Theme Toggle & Two-Line Hamburger Button -->
+    <div class="col-span-6 sm:col-span-8 lg:col-span-3 flex items-center justify-end px-3 sm:px-5 gap-2 sm:gap-3">
+      <!-- Quick Theme Switcher Pill -->
+      <button
+        id="theme-quick-toggle"
+        type="button"
+        aria-label="Toggle Light/Dark Theme"
+        class="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-2.5 py-1 font-mono text-[10px] font-medium text-white hover:bg-white/20 transition-all"
+      >
+        <span class="h-2 w-2 rounded-full bg-white animate-pulse"></span>
+        <span id="theme-label" class="uppercase">LIGHT</span>
+      </button>
+
+      <!-- Minimal 2-Line Hamburger Icon (=) -->
+      <button
+        type="button"
+        data-open-drawer
+        aria-label="Open Fullscreen Menu"
+        class="flex h-9 sm:h-10 w-9 sm:w-10 items-center justify-center rounded border border-white/30 bg-white/10 text-white hover:bg-white/25 active:scale-95 transition-all"
+      >
+        <div class="flex flex-col gap-1.5 w-4.5 justify-center items-center">
+          <span class="block h-[2px] w-4 bg-white rounded-full"></span>
+          <span class="block h-[2px] w-4 bg-white rounded-full"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Client-side script for quick theme toggle -->
+  <script is:inline>
+    const setupThemeToggle = () => {
+      const btn = document.getElementById('theme-quick-toggle');
+      const label = document.getElementById('theme-label');
+      if (!btn || !label) return;
+
+      const updateLabel = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        label.textContent = isDark ? 'DARK' : 'LIGHT';
+      };
+
+      updateLabel();
+
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateLabel();
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupThemeToggle);
+    } else {
+      setupThemeToggle();
+    }
+  </script>
+</header>
+
+<!-- Full-Screen Slide-Out Menu Drawer -->
+<NavigationDrawer client:load currentPath={currentPath} />

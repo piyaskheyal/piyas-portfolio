@@ -1,0 +1,38 @@
+---
+import ScrollBlurReveal from './ScrollBlurReveal';
+import ExpandingButton from './ExpandingButton.astro';
+import ProjectExplorer from './ProjectExplorer';
+
+interface Props {
+  projects: any[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="projects" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+      <div class="space-y-4">
+        <div class="section-pill-badge">
+          <span class="section-pill-star">✦</span>
+          <span>SELECTED WORKS</span>
+        </div>
+
+        <ScrollBlurReveal
+          client:visible
+          primaryText="SELECTED RESEARCH"
+          blurredText="&amp; ROBOTICS PROJECTS."
+        />
+      </div>
+
+      <div class="shrink-0">
+        <ExpandingButton href="/service" label="ALL DISCIPLINES" />
+      </div>
+    </div>
+
+    <!-- Asymmetric Interactive Explorer with Inspector Drawer -->
+    <ProjectExplorer client:load projects={projects} />
+  </div>
+</section>

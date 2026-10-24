@@ -2,28 +2,28 @@
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<header class="sticky top-0 z-30 border-b border-black/[0.06] dark:border-white/[0.07] bg-surface-950/80 backdrop-blur-md">
+<header class="sticky top-0 z-30 border-b border-black/[0.06] dark:border-white/[0.08] bg-surface-950/75 backdrop-blur-2xl shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
     <a href="#" class="group flex items-center gap-3 focus:outline-none">
-      <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 font-mono text-xs font-semibold text-emerald-600 dark:text-accent transition-colors group-hover:border-emerald-500/40">
+      <div class="glass-chip flex h-8 w-8 items-center justify-center rounded-xl font-mono text-xs font-semibold text-emerald-600 dark:text-accent transition-colors group-hover:border-emerald-500/40">
         PK
       </div>
       <div>
-        <span class="block text-sm font-medium tracking-tight text-zinc-900 dark:text-white">
+        <span class="block text-sm font-semibold tracking-[-0.015em] text-zinc-950 dark:text-white">
           {SITE_CONFIG.name}
         </span>
-        <span class="block font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+        <span class="block font-mono text-[10px] uppercase tracking-[0.05em] text-zinc-500 dark:text-zinc-400">
           PHYSICAL AI • ROBOTICS
         </span>
       </div>
     </a>
 
-    <nav class="hidden items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400 md:flex">
-      <a href="#projects" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Systems</a>
-      <a href="#experience" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Journey</a>
-      <a href="#rig" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Lab Rig</a>
-      <a href="#architecture" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Stack</a>
-      <a href="#contact" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Contact</a>
+    <nav class="hidden items-center gap-6 text-xs font-medium text-zinc-600 dark:text-zinc-400 md:flex">
+      <a href="#projects" class="transition-colors hover:text-zinc-950 dark:hover:text-white">Systems</a>
+      <a href="#experience" class="transition-colors hover:text-zinc-950 dark:hover:text-white">Journey</a>
+      <a href="#rig" class="transition-colors hover:text-zinc-950 dark:hover:text-white">Lab Rig</a>
+      <a href="#architecture" class="transition-colors hover:text-zinc-950 dark:hover:text-white">Stack</a>
+      <a href="#contact" class="transition-colors hover:text-zinc-950 dark:hover:text-white">Contact</a>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -31,7 +31,7 @@ import { SITE_CONFIG } from '../config/site';
       <button
         id="theme-toggle-btn"
         type="button"
-        class="tactile-btn flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+        class="tactile-btn glass-chip flex h-8 w-8 items-center justify-center rounded-xl text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
         aria-label="Toggle theme"
       >
         <!-- Sun icon (visible in dark mode) -->
@@ -48,11 +48,11 @@ import { SITE_CONFIG } from '../config/site';
       <button
         id="open-cmd-btn"
         type="button"
-        class="tactile-btn flex items-center gap-2.5 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 px-3 py-1.5 text-xs text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+        class="tactile-btn glass-chip flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
         aria-label="Open command menu"
       >
         <span>Quick Jump</span>
-        <kbd class="rounded border border-black/[0.06] dark:border-white/10 bg-surface-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+        <kbd class="rounded border border-black/[0.06] dark:border-white/10 bg-surface-800/80 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
           ⌘K
         </kbd>
       </button>

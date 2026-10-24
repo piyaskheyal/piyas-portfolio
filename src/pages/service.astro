@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import { SITE_CONFIG } from '../config/site';
+import HeaderBar from '../components/HeaderBar.astro';
+import StickyServiceStack from '../components/StickyServiceStack';
+import ContactBanner from '../components/ContactBanner.astro';
+import SwissFooter from '../components/SwissFooter.astro';
+import ScrollRevealEngine from '../components/ScrollRevealEngine.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services & Disciplines — {SITE_CONFIG.name}</title>
+    <meta name="description" content={`Engineering Services and Core Disciplines by ${SITE_CONFIG.name}`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-[#F6F6F4] dark:bg-[#0F0F0F] text-zinc-900 dark:text-zinc-100 antialiased font-sans transition-colors selection:bg-[#EB4618] selection:text-white">
+    <HeaderBar currentPath="/service" />
+
+    <main>
+      <!-- Hero Section for Services Page -->
+      <section class="pt-16 pb-12 border-b border-stone-200 dark:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-stone-200 dark:border-white/10 pb-8">
+            <div>
+              <span class="block font-mono text-xs uppercase tracking-widest text-[#EB4618] font-bold mb-2">
+                {SITE_CONFIG.brandName}
+              </span>
+              <h1 class="giant-display-title text-zinc-950 dark:text-white tracking-[-0.04em]">
+                SERVICES
+              </h1>
+            </div>
+
+            <div class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              <span>©2026 (SCROLL TO EXPLORE STACKING STACKS)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky-Stacking Service Cards Section -->
+      <section class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <div class="mb-12 max-w-2xl space-y-3">
+            <div class="section-pill-badge">
+              <span class="section-pill-star">✦</span>
+              <span>SPECIALIZED CAPABILITIES</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-zinc-950 dark:text-white">
+              ENGINEERED FROM GROUND ZERO <br />
+              <span class="text-[#EB4618]">FOR PHYSICAL CONVERGENCE.</span>
+            </h2>
+            <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Every card stacks smoothly as you scroll, highlighting telemetry visualizers, dual-image crossfades, and production capabilities.
+            </p>
+          </div>
+
+          <!-- Sticky Stacking Service Cards Container -->
+          <StickyServiceStack client:load services={SITE_CONFIG.services} />
+        </div>
+      </section>
+
+      <!-- Global Contact Banner -->
+      <ContactBanner />
+    </main>
+
+    <SwissFooter />
+    <ScrollRevealEngine />
+  </body>
+</html>

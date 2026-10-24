@@ -1,0 +1,45 @@
+---
+// ScrollRevealEngine.astro
+// Automatic IntersectionObserver driver for .reveal-on-scroll elements
+---
+
+<script is:inline>
+  function setupScrollReveals() {
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    if (!elements || elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px',
+      }
+    );
+
+    elements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Immediate reveal for elements visible on load (above the fold)
+        el.classList.add('is-revealed');
+      } else {
+        observer.observe(el);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupScrollReveals);
+  } else {
+    setupScrollReveals();
+  }
+
+  // Also listen for Astro view transitions if active
+  document.addEventListener('astro:page-load', setupScrollReveals);
+</script>

@@ -1,0 +1,169 @@
+---
+import { ArrowUpRight } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] pt-16 pb-8 transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 pb-16 border-b border-stone-200 dark:border-white/10">
+      <!-- Left Column: Bio & Direct Contacts -->
+      <div class="lg:col-span-5 space-y-6">
+        <div>
+          <span class="font-extrabold text-2xl tracking-tight text-zinc-950 dark:text-white">
+            {SITE_CONFIG.brandName}
+          </span>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-sm">
+            {SITE_CONFIG.tagline} Focused on NVIDIA Isaac Lab simulation, SO-101 robotic arm teleoperation, and autonomous mobile navigation stacks.
+          </p>
+        </div>
+
+        <div class="space-y-2 text-sm font-mono">
+          <div>
+            <span class="block text-[10px] uppercase text-zinc-400 dark:text-zinc-500">Electronic Mail</span>
+            <a
+              href={`mailto:${SITE_CONFIG.email}`}
+              class="font-semibold text-zinc-950 dark:text-white hover:text-[#EB4618] dark:hover:text-[#EB4618] transition-colors"
+            >
+              {SITE_CONFIG.email}
+            </a>
+          </div>
+          <div>
+            <span class="block text-[10px] uppercase text-zinc-400 dark:text-zinc-500">Location Base</span>
+            <span class="text-zinc-700 dark:text-zinc-300">
+              {SITE_CONFIG.location}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Columns: Nav Links & Social Outlets -->
+      <div class="grid grid-cols-2 gap-8 lg:col-span-3">
+        <div>
+          <span class="block font-mono text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-4 font-semibold">
+            Directory
+          </span>
+          <ul class="space-y-2.5 text-sm font-medium">
+            <li>
+              <a href="/" class="text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/about" class="text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors">
+                About Me
+              </a>
+            </li>
+            <li>
+              <a href="/service" class="text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors">
+                Services & Disciplines
+              </a>
+            </li>
+            <li>
+              <a href="/blog" class="text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors">
+                Research Insights
+              </a>
+            </li>
+            <li>
+              <a href="/contact" class="text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors">
+                Contact & Rig Telemetry
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="block font-mono text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-4 font-semibold">
+            Network
+          </span>
+          <ul class="space-y-2.5 text-sm font-medium">
+            <li>
+              <a
+                href={SITE_CONFIG.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors"
+              >
+                <span>GitHub</span>
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE_CONFIG.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors"
+              >
+                <span>LinkedIn</span>
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE_CONFIG.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-zinc-800 dark:text-zinc-300 hover:text-[#EB4618] transition-colors"
+              >
+                <span>YouTube</span>
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Research Dispatch + Massive Brand Wordmark -->
+      <div class="lg:col-span-4 flex flex-col justify-between">
+        <!-- Newsletter / Dispatch box -->
+        <div class="rounded-xl border border-stone-300 dark:border-white/10 bg-white dark:bg-[#161616] p-5 shadow-sm">
+          <span class="block font-mono text-xs uppercase tracking-wider text-[#EB4618] font-bold">
+            ✦ LAB RESEARCH DISPATCH
+          </span>
+          <p class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+            Occasional technical writeups on NVIDIA Isaac Sim, imitation learning, and physical hardware builds.
+          </p>
+          <form
+            action={`mailto:${SITE_CONFIG.email}`}
+            method="GET"
+            class="mt-3 flex items-center gap-2"
+          >
+            <input
+              type="email"
+              placeholder="engineer@domain.com"
+              required
+              class="w-full rounded border border-stone-300 dark:border-white/20 bg-stone-50 dark:bg-zinc-800 px-3 py-2 text-xs text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:border-[#EB4618] focus:outline-none"
+            />
+            <button
+              type="submit"
+              class="shrink-0 rounded bg-[#EB4618] px-3.5 py-2 font-mono text-xs font-bold text-white hover:bg-[#C8320A] transition-colors"
+            >
+              JOIN
+            </button>
+          </form>
+        </div>
+
+        <!-- Massive Brand Wordmark -->
+        <div class="mt-8 text-right select-none">
+          <span class="font-extrabold tracking-tighter text-4xl sm:text-6xl lg:text-7xl text-stone-300/70 dark:text-zinc-800/80 leading-none">
+            {SITE_CONFIG.brandName}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright Strip -->
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-zinc-500 dark:text-zinc-400 gap-4">
+      <div class="flex items-center gap-2">
+        <span>© {currentYear} {SITE_CONFIG.name}.</span>
+        <span class="text-stone-300 dark:text-zinc-700">//</span>
+        <span>Swiss Editorial Grid System</span>
+      </div>
+      <div>
+        <span>Physical AI • Sim-to-Real • Embodied Intelligence</span>
+      </div>
+    </div>
+  </div>
+</footer>

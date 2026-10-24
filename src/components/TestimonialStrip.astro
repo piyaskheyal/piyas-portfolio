@@ -1,0 +1,106 @@
+---
+import ScrollBlurReveal from './ScrollBlurReveal';
+import { Star } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section id="testimonials" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- Header -->
+    <div class="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+      <div class="space-y-4">
+        <div class="section-pill-badge">
+          <span class="section-pill-star">✦</span>
+          <span>LAB ENDORSEMENTS</span>
+        </div>
+
+        <ScrollBlurReveal
+          client:visible
+          primaryText="WHAT PRINCIPAL ENGINEERS"
+          blurredText="&amp; RESEARCH DIRECTORS SAY."
+        />
+      </div>
+
+      <div class="max-w-md">
+        <p class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          Evaluations from collaborators across autonomous mobile systems, Sim-to-Real bipedal research, and manipulator firmware.
+        </p>
+      </div>
+    </div>
+
+    <!-- Alternating Card Strip (4 Columns) -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {SITE_CONFIG.testimonials.map((t, idx) => {
+        const isOdd = idx % 2 === 1;
+        return (
+          <div class={`reveal-on-scroll delay-${idx + 1} relative flex flex-col justify-between rounded-xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-6 shadow-sm transition-all hover:border-[#EB4618]`}>
+            <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+            {isOdd ? (
+              <>
+                <!-- Odd Layout: Stars and quote at top, author at bottom -->
+                <div>
+                  <div class="flex items-center gap-1 text-[#EB4618] mb-3">
+                    {[...Array(5)].map(() => (
+                      <Star className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed italic">
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-stone-200 dark:border-white/10 flex items-center gap-3">
+                  <div class="h-8 w-8 rounded-full overflow-hidden bg-stone-200">
+                    <img src={t.avatar} alt={t.author} class="h-full w-full object-cover" />
+                  </div>
+                  <div>
+                    <span class="block text-xs font-bold text-zinc-950 dark:text-white">
+                      {t.author}
+                    </span>
+                    <span class="block text-[10px] font-mono text-zinc-500">
+                      {t.role}
+                    </span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <!-- Even Layout: Author at top, quote at bottom -->
+                <div>
+                  <div class="flex items-center gap-3 border-b border-stone-200 dark:border-white/10 pb-4 mb-4">
+                    <div class="h-8 w-8 rounded-full overflow-hidden bg-stone-200">
+                      <img src={t.avatar} alt={t.author} class="h-full w-full object-cover" />
+                    </div>
+                    <div>
+                      <span class="block text-xs font-bold text-zinc-950 dark:text-white">
+                        {t.author}
+                      </span>
+                      <span class="block text-[10px] font-mono text-zinc-500">
+                        {t.role}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed italic">
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                <div class="mt-6 pt-2 flex items-center gap-1 text-[#EB4618]">
+                  {[...Array(5)].map(() => (
+                    <Star className="h-3 w-3 fill-current" />
+                  ))}
+                  <span class="font-mono text-[10px] text-zinc-400 ml-1">5/5 VERIFIED</span>
+                </div>
+              </>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

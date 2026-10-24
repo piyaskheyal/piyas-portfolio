@@ -1,0 +1,25 @@
+---
+import { ArrowUpRight } from 'lucide-react';
+
+interface Props {
+  href: string;
+  label: string;
+  target?: string;
+  class?: string;
+}
+
+const { href, label, target, class: className = '' } = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+  class={`btn-expanding-orange group ${className}`}
+>
+  <span class="btn-slide-bg"></span>
+  <span class="btn-label">{label}</span>
+  <span class="btn-icon-square">
+    <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:rotate-45" />
+  </span>
+</a>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Cpu,
   Terminal,
@@ -9,7 +10,6 @@ import {
   Layers,
   Box,
   ArrowUpRight,
-  SlidersHorizontal,
 } from 'lucide-react';
 
 export interface ProjectItem {
@@ -44,12 +44,17 @@ export default function ProjectExplorer({ projects }: Props) {
   const [activeCategory, setActiveCategory] = useState<string>('All Systems');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number } | null>(null);
 
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const tabsContainerRef = useRef<HTMLDivElement | null>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filteredProjects =
     activeCategory === 'All Systems'
@@ -78,22 +83,20 @@ export default function ProjectExplorer({ projects }: Props) {
 
   const openProjectDrawer = useCallback((project: ProjectItem) => {
     setSelectedProject(project);
-    // Double requestAnimationFrame guarantees initial layout paint before drawer transition
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setIsDrawerOpen(true);
-      });
-    });
-    document.body.style.overflow = 'hidden';
+    setIsDrawerOpen(true);
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden';
+    }
   }, []);
 
   const closeProjectDrawer = useCallback(() => {
     setIsDrawerOpen(false);
-    document.body.style.overflow = '';
-    // 360ms matches the --ease-drawer transition duration
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
     setTimeout(() => {
       setSelectedProject(null);
-    }, 360);
+    }, 280);
   }, []);
 
   // Listen for Command Menu selection and Toast trigger events
@@ -180,24 +183,29 @@ export default function ProjectExplorer({ projects }: Props) {
         </div>
 
         <div className="flex items-center gap-2 font-mono text-xs text-zinc-500 dark:text-zinc-400">
-          <SlidersHorizontal className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>Click any module to open Technical Inspector</span>
+          <span className="text-[#EB4618] font-bold">✦</span>
+          <span>Click any card to open Technical Inspector</span>
         </div>
       </div>
 
       {/* Project Bento Grid with Staggered Entrance on Filter */}
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project, index) => (
           <article
             key={`${activeCategory}-${project.slug}`}
             onClick={() => openProjectDrawer(project)}
             style={{ animationDelay: `${Math.min(index * 40, 160)}ms` }}
-            className="project-card card-filter-enter group relative flex cursor-pointer flex-col justify-between rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-surface-900/90 dark:bg-surface-900/75 p-6 shadow-xs dark:shadow-none backdrop-blur-sm"
+            className="card-filter-enter group relative flex cursor-pointer flex-col justify-between rounded-2xl border border-stone-300 dark:border-white/10 bg-white dark:bg-[#161616] p-6 shadow-sm hover:border-[#EB4618] hover:-translate-y-1 transition-all"
           >
+            {/* Corner Crosshairs */}
+            <span className="crosshair-corner crosshair-tl text-zinc-400">+</span>
+            <span className="crosshair-corner crosshair-tr text-zinc-400">+</span>
+            <span className="crosshair-corner crosshair-bl text-zinc-400">+</span>
+            <span className="crosshair-corner crosshair-br text-zinc-400">+</span>
             <div>
               {/* Visual Robotics Telemetry Preview Slot */}
               {project.slug === 'so101-vla' && (
-                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
+                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-2xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
                   <div className="absolute inset-0 bg-telemetry-grid opacity-60"></div>
                   <div className="relative flex items-center justify-between text-zinc-400">
                     <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
@@ -221,7 +229,7 @@ export default function ProjectExplorer({ projects }: Props) {
               )}
 
               {project.slug === 'bipedal-isaaclab' && (
-                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
+                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-2xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
                   <div className="absolute inset-0 bg-telemetry-grid opacity-60"></div>
                   <div className="relative flex items-center justify-between text-zinc-400">
                     <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
@@ -249,7 +257,7 @@ export default function ProjectExplorer({ projects }: Props) {
               )}
 
               {project.slug === 'amr-slam-nav' && (
-                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
+                <div className="relative mb-5 h-36 w-full overflow-hidden rounded-2xl border border-black/[0.06] dark:border-white/10 bg-surface-950 p-3 font-mono text-[10px]">
                   <div className="absolute inset-0 bg-telemetry-grid opacity-60"></div>
                   <div className="relative flex items-center justify-between text-zinc-400">
                     <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
@@ -276,17 +284,24 @@ export default function ProjectExplorer({ projects }: Props) {
 
               {/* Top Telemetry Header */}
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-md border border-emerald-600/20 bg-emerald-600/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300">
+                <span className="inline-flex items-center gap-1.5 rounded-md border border-[#EB4618]/25 bg-[#EB4618]/10 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-[#EB4618]">
                   {project.category}
                 </span>
-                <span className="inline-flex items-center gap-1 font-mono text-xs text-zinc-500 group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-white transition-colors">
-                  <span>Inspect</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openProjectDrawer(project);
+                  }}
+                  className="inline-flex items-center gap-1 font-mono text-xs font-bold text-zinc-600 hover:text-[#EB4618] dark:text-zinc-400 dark:hover:text-[#EB4618] transition-colors"
+                >
+                  <span>INSPECT SPEC</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </button>
               </div>
 
-              {/* Title & Subtitle */}
-              <h3 className="mt-4 text-lg font-semibold tracking-tight text-zinc-900 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-300 transition-colors">
+              {/* Title & Subtitle with Apple Display Typography */}
+              <h3 className="mt-4 text-xl font-semibold tracking-[-0.025em] text-zinc-950 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400 transition-colors">
                 {project.title}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
@@ -294,13 +309,13 @@ export default function ProjectExplorer({ projects }: Props) {
               </p>
 
               {/* Key Telemetry Metrics Grid */}
-              <div className="mt-5 grid grid-cols-3 gap-2 rounded-xl border border-black/[0.05] dark:border-white/[0.06] bg-surface-800/40 dark:bg-surface-950/70 p-3">
+              <div className="mt-5 grid grid-cols-3 gap-2 rounded-2xl border border-black/[0.05] dark:border-white/[0.06] bg-surface-800/40 dark:bg-surface-950/70 p-3.5">
                 {project.metrics.map((m) => (
                   <div key={m.label}>
-                    <span className="block font-mono text-[10px] uppercase text-zinc-400 dark:text-zinc-500">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.04em] text-zinc-400 dark:text-zinc-500">
                       {m.label}
                     </span>
-                    <span className="mt-0.5 block font-mono text-xs font-medium text-zinc-800 dark:text-zinc-200">
+                    <span className="mt-0.5 block font-mono text-xs font-semibold text-zinc-800 dark:text-zinc-200">
                       {m.value}
                     </span>
                   </div>
@@ -314,7 +329,7 @@ export default function ProjectExplorer({ projects }: Props) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded border border-black/[0.06] dark:border-white/[0.07] bg-surface-800/80 dark:bg-surface-800/70 px-2 py-0.5 font-mono text-[11px] text-zinc-600 dark:text-zinc-300"
+                    className="glass-chip rounded-lg px-2 py-0.5 font-mono text-[11px] text-zinc-600 dark:text-zinc-300"
                   >
                     {tag}
                   </span>
@@ -325,10 +340,10 @@ export default function ProjectExplorer({ projects }: Props) {
         ))}
       </div>
 
-      {/* Vaul-Style Origin-Aware Technical Inspector Drawer */}
-      {selectedProject && (
+      {/* Origin-Aware Technical Inspector Drawer via Portal */}
+      {mounted && selectedProject && createPortal(
         <div
-          className="fixed inset-0 z-50 flex justify-end"
+          className="fixed inset-0 z-[250] flex justify-end"
           role="dialog"
           aria-modal="true"
           aria-labelledby="drawer-title"
@@ -336,34 +351,35 @@ export default function ProjectExplorer({ projects }: Props) {
           {/* Backdrop */}
           <div
             onClick={closeProjectDrawer}
-            className={`drawer-backdrop fixed inset-0 bg-black/40 dark:bg-black/70 backdrop-blur-xs ${
-              isDrawerOpen ? 'opacity-100' : 'opacity-0'
+            className={`fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${
+              isDrawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
             }`}
           />
 
           {/* Slide-over Sheet Panel */}
           <div
-            className={`drawer-panel relative z-10 flex h-full w-full max-w-2xl flex-col border-l border-black/[0.08] dark:border-white/10 bg-surface-900 text-zinc-900 dark:text-zinc-100 shadow-2xl ${
-              isDrawerOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-95'
+            className={`relative z-10 flex h-full w-full max-w-2xl flex-col border-l border-stone-200 dark:border-white/10 bg-white dark:bg-[#161616] text-zinc-950 dark:text-white shadow-2xl transition-transform duration-300 ease-out ${
+              isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
           >
             {/* Sticky Drawer Topbar */}
-            <div className="flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.08] px-6 py-4">
+            <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 px-6 py-4 bg-stone-50/80 dark:bg-zinc-900/80 backdrop-blur-md">
               <div className="flex items-center gap-2.5">
-                <span className="rounded-md border border-emerald-600/20 bg-emerald-600/10 px-2.5 py-0.5 font-mono text-xs text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300">
+                <span className="rounded-md border border-[#EB4618]/25 bg-[#EB4618]/10 px-2.5 py-0.5 font-mono text-xs font-bold text-[#EB4618]">
                   {selectedProject.category}
                 </span>
                 <span className="font-mono text-xs text-zinc-400 dark:text-zinc-500">
-                  // SYSTEM SPEC
+                  // SYSTEM SPECIFICATION
                 </span>
               </div>
 
               <button
+                type="button"
                 onClick={closeProjectDrawer}
-                className="tactile-btn inline-flex items-center gap-1.5 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-800 px-2.5 py-1.5 text-xs text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-300 dark:border-white/20 bg-white dark:bg-zinc-800 px-3 py-1.5 text-xs font-bold text-zinc-800 hover:bg-[#EB4618] hover:text-white dark:text-zinc-200 dark:hover:bg-[#EB4618] dark:hover:text-white transition-all"
               >
-                <span>Close</span>
-                <kbd className="rounded bg-surface-700 dark:bg-surface-950 px-1.5 py-0.5 font-mono text-[10px] text-zinc-600 dark:text-zinc-400">
+                <span>CLOSE</span>
+                <kbd className="rounded bg-stone-100 dark:bg-zinc-900 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
                   ESC
                 </kbd>
                 <X className="h-3.5 w-3.5" />
@@ -505,7 +521,8 @@ export default function ProjectExplorer({ projects }: Props) {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Sonner-Style Crisp Floating Toast */}

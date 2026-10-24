@@ -1,0 +1,273 @@
+---
+import '../styles/global.css';
+import { SITE_CONFIG } from '../config/site';
+import HeaderBar from '../components/HeaderBar.astro';
+import FAQAccordion from '../components/FAQAccordion';
+import SwissFooter from '../components/SwissFooter.astro';
+import ScrollRevealEngine from '../components/ScrollRevealEngine.astro';
+import { MapPin, Clock, Mail, Globe, ArrowUpRight } from 'lucide-react';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact & Inquiries — {SITE_CONFIG.name}</title>
+    <meta name="description" content={`Connect with ${SITE_CONFIG.name} — Robotics Engineer`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-[#F6F6F4] dark:bg-[#0F0F0F] text-zinc-900 dark:text-zinc-100 antialiased font-sans transition-colors selection:bg-[#EB4618] selection:text-white">
+    <HeaderBar currentPath="/contact" />
+
+    <main>
+      <!-- Hero & 2x2 Contact Tiles -->
+      <section class="pt-16 pb-20 border-b border-stone-200 dark:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-stone-200 dark:border-white/10 pb-8 mb-12">
+            <div>
+              <span class="block font-mono text-xs uppercase tracking-widest text-[#EB4618] font-bold mb-2">
+                {SITE_CONFIG.brandName}
+              </span>
+              <h1 class="giant-display-title text-zinc-950 dark:text-white tracking-[-0.04em]">
+                CONTACT ME
+              </h1>
+            </div>
+
+            <div class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              <span>©2026 // OPEN FOR RESEARCH &amp; ROLES</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+            <!-- Left Column: Ready to start & CTA -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="section-pill-badge">
+                <span class="section-pill-star">✦</span>
+                <span>READY TO COLLABORATE?</span>
+              </div>
+
+              <h2 class="text-4xl sm:text-5xl font-extrabold uppercase tracking-tight text-zinc-950 dark:text-white leading-[1.05]">
+                GET IN TOUCH <br />
+                WITH <span class="text-[#EB4618]">PIYAS.</span>
+              </h2>
+
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Whether you have an Isaac Sim reinforcement learning project, need custom URDF rigging, or are building physical manipulator teleoperation rigs, send a message directly to my station.
+              </p>
+
+              <div class="pt-2">
+                <a
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  class="btn-expanding-orange group"
+                >
+                  <span class="btn-slide-bg"></span>
+                  <span class="btn-label">DIRECT DISPATCH</span>
+                  <span class="btn-icon-square">
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:rotate-45" />
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: 2x2 Grid of #EBEBE9 Square Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:col-span-7">
+              <!-- Tile 1: Address / Base -->
+              <div class="relative rounded-2xl border border-stone-300 dark:border-white/10 bg-[#EBEBE9] dark:bg-[#161616] p-6 shadow-sm">
+                <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+                <MapPin className="h-5 w-5 text-[#EB4618] mb-3" />
+                <span class="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Lab Location
+                </span>
+                <h3 class="mt-2 text-base font-bold text-zinc-950 dark:text-white">
+                  {SITE_CONFIG.location}
+                </h3>
+              </div>
+
+              <!-- Tile 2: Operating Hours -->
+              <div class="relative rounded-2xl border border-stone-300 dark:border-white/10 bg-[#EBEBE9] dark:bg-[#161616] p-6 shadow-sm">
+                <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+                <Clock className="h-5 w-5 text-[#EB4618] mb-3" />
+                <span class="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Operating Hours
+                </span>
+                <h3 class="mt-2 text-base font-bold text-zinc-950 dark:text-white">
+                  {SITE_CONFIG.officeHours}
+                </h3>
+              </div>
+
+              <!-- Tile 3: Electronic Mail -->
+              <div class="relative rounded-2xl border border-stone-300 dark:border-white/10 bg-[#EBEBE9] dark:bg-[#161616] p-6 shadow-sm">
+                <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+                <Mail className="h-5 w-5 text-[#EB4618] mb-3" />
+                <span class="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Electronic Mail
+                </span>
+                <a
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  class="mt-2 block text-base font-bold text-zinc-950 dark:text-white hover:text-[#EB4618] transition-colors"
+                >
+                  {SITE_CONFIG.email}
+                </a>
+              </div>
+
+              <!-- Tile 4: Network & Channels -->
+              <div class="relative rounded-2xl border border-stone-300 dark:border-white/10 bg-[#EBEBE9] dark:bg-[#161616] p-6 shadow-sm">
+                <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+                <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+                <Globe className="h-5 w-5 text-[#EB4618] mb-3" />
+                <span class="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Direct Channels
+                </span>
+                <div class="mt-2 flex items-center gap-3 font-mono text-xs font-bold text-zinc-900 dark:text-white">
+                  <a href={SITE_CONFIG.socials.github} target="_blank" rel="noopener noreferrer" class="hover:text-[#EB4618]">
+                    GitHub ↗
+                  </a>
+                  <a href={SITE_CONFIG.socials.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-[#EB4618]">
+                    LinkedIn ↗
+                  </a>
+                  <a href={SITE_CONFIG.socials.youtube} target="_blank" rel="noopener noreferrer" class="hover:text-[#EB4618]">
+                    YouTube ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dark Inquiry Form Section -->
+      <section class="py-16 md:py-24 bg-[#0F0F0F] text-white border-b border-stone-200 dark:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <div class="mx-auto max-w-3xl">
+            <div class="mb-10 text-center space-y-2">
+              <span class="font-mono text-xs uppercase tracking-widest text-[#EB4618] font-bold">
+                INQUIRY SPECIFICATION
+              </span>
+              <h2 class="text-3xl sm:text-4xl font-extrabold uppercase text-white tracking-tight">
+                SUBMIT A LAB INQUIRY
+              </h2>
+            </div>
+
+            <!-- Dark Gray Form Container -->
+            <form
+              action={`mailto:${SITE_CONFIG.email}`}
+              method="GET"
+              class="rounded-2xl border border-white/15 bg-[#181818] p-6 sm:p-10 shadow-2xl space-y-6"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label class="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
+                    ©FIRST NAME
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Marcus"
+                    required
+                    class="w-full rounded-md border border-white/10 bg-[#262626] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#EB4618] focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label class="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
+                    ©LAST NAME
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Vance"
+                    required
+                    class="w-full rounded-md border border-white/10 bg-[#262626] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#EB4618] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
+                  ©EMAIL ADDRESS
+                </label>
+                <input
+                  type="email"
+                  placeholder="marcus@apexautonomy.com"
+                  required
+                  class="w-full rounded-md border border-white/10 bg-[#262626] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#EB4618] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label class="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
+                  ©PROJECT &amp; HARDWARE REQUIREMENTS
+                </label>
+                <textarea
+                  rows="4"
+                  placeholder="Describe your simulation environment, robotic manipulators, or project goals..."
+                  required
+                  class="w-full rounded-md border border-white/10 bg-[#262626] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#EB4618] focus:outline-none resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full rounded bg-[#EB4618] py-3.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-[#C8320A] transition-colors"
+              >
+                SUBMIT NOW ↗
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <div class="max-w-3xl mx-auto space-y-8">
+            <div class="text-center space-y-2">
+              <span class="font-mono text-xs uppercase tracking-widest text-[#EB4618] font-bold">
+                FREQUENT QUESTIONS
+              </span>
+              <h2 class="text-3xl font-extrabold uppercase text-zinc-950 dark:text-white">
+                ANSWERS TO COMMON INQUIRIES
+              </h2>
+            </div>
+            <FAQAccordion client:visible items={SITE_CONFIG.faqs} />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <SwissFooter />
+    <ScrollRevealEngine />
+  </body>
+</html>

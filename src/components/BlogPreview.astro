@@ -1,0 +1,117 @@
+---
+import ScrollBlurReveal from './ScrollBlurReveal';
+import ExpandingButton from './ExpandingButton.astro';
+import { SITE_CONFIG } from '../config/site';
+
+const articles = SITE_CONFIG.articles.slice(0, 3);
+---
+
+<section id="insights" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] transition-colors">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- Header -->
+    <div class="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+      <div class="space-y-4">
+        <div class="section-pill-badge">
+          <span class="section-pill-star">✦</span>
+          <span>RESEARCH INSIGHTS</span>
+        </div>
+
+        <ScrollBlurReveal
+          client:visible
+          primaryText="LATEST ROBOTICS"
+          blurredText="&amp; PHYSICAL AI INSIGHTS."
+        />
+      </div>
+
+      <div class="max-w-md">
+        <p class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          Peer writeups exploring Sim-to-Real transference, zero-shot reinforcement learning gaits, and low-latency C++ firmware execution.
+        </p>
+      </div>
+    </div>
+
+    <!-- Asymmetric Layout: Left Large Card, Right Two Smaller Cards -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+      <!-- Left Large Card (6 cols) -->
+      {articles[0] && (
+        <a
+          href="/blog"
+          class="reveal-on-scroll delay-1 group relative flex flex-col justify-between rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-4 sm:p-6 lg:col-span-6 shadow-sm transition-all hover:border-[#EB4618]"
+        >
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+          <div class="relative h-64 sm:h-80 w-full overflow-hidden rounded-xl bg-zinc-950">
+            <img
+              src={articles[0].image}
+              alt={articles[0].title}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 rounded bg-[#EB4618] px-2.5 py-1 font-mono text-[10px] font-bold text-white uppercase tracking-wider">
+              {articles[0].category}
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4">
+              <span class="font-mono text-[11px] text-white/70 block mb-1">
+                {articles[0].date} • {articles[0].readTime}
+              </span>
+              <h3 class="text-xl sm:text-2xl font-extrabold uppercase leading-tight text-white group-hover:text-[#EB4618] transition-colors">
+                {articles[0].title}
+              </h3>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            <span>Written by {articles[0].author}</span>
+            <span class="text-[#EB4618] font-bold group-hover:translate-x-1 transition-transform">READ ARTICLE ↗</span>
+          </div>
+        </a>
+      )}
+
+      <!-- Right 2 Smaller Cards (6 cols) -->
+      <div class="reveal-on-scroll delay-2 flex flex-col gap-6 lg:col-span-6 justify-between">
+        {articles.slice(1, 3).map((article) => (
+          <a
+            href="/blog"
+            class="group relative flex flex-col justify-between rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-4 sm:p-6 shadow-sm transition-all hover:border-[#EB4618]"
+          >
+            <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+            <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
+
+            <div class="flex items-start justify-between border-b border-stone-200 dark:border-white/10 pb-3">
+              <span class="rounded bg-stone-100 dark:bg-zinc-800 px-2 py-0.5 font-mono text-[10px] font-bold uppercase text-[#EB4618]">
+                {article.category}
+              </span>
+              <span class="font-mono text-[11px] text-zinc-400">
+                {article.date} • {article.readTime}
+              </span>
+            </div>
+
+            <h3 class="mt-4 text-lg sm:text-xl font-extrabold uppercase tracking-tight text-zinc-950 dark:text-white group-hover:text-[#EB4618] transition-colors">
+              {article.title}
+            </h3>
+
+            <p class="mt-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {article.summary}
+            </p>
+
+            <div class="mt-4 pt-3 border-t border-stone-200 dark:border-white/10 flex items-center justify-between font-mono text-xs">
+              <span class="text-zinc-500">By {article.author}</span>
+              <span class="text-[#EB4618] font-bold group-hover:translate-x-1 transition-transform">EXPLORE ↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Footer Button -->
+    <div class="mt-12 flex justify-start">
+      <ExpandingButton href="/blog" label="ALL ARTICLES &amp; DISPATCHES" />
+    </div>
+  </div>
+</section>
