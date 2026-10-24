@@ -1,0 +1,73 @@
+---
+import { SITE_CONFIG } from '../config/site';
+---
+
+<section class="relative overflow-hidden border-b border-white/[0.07] pt-14 pb-16 md:pt-20 md:pb-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Live Telemetry Status Pill -->
+    <div class="stagger-item stagger-1 inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/[0.07] px-3.5 py-1 text-xs font-medium text-emerald-300">
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+      </span>
+      <span class="font-mono text-[11px] uppercase tracking-wider">{SITE_CONFIG.status}</span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="stagger-item stagger-2 mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl md:leading-[1.08]">
+      Building embodied intelligence from <span class="text-emerald-400">Isaac Lab</span> simulation to physical hardware.
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="stagger-item stagger-3 mt-6 max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+      I’m <strong class="font-medium text-zinc-100">{SITE_CONFIG.name}</strong> — a Robotics Engineer specializing in
+      <span class="text-zinc-200">Physical AI</span>, bipedal locomotion in
+      <span class="text-zinc-200">NVIDIA Isaac Sim & Isaac Lab</span>,
+      <span class="text-zinc-200">VLA training on the SO-101 arm</span>, and autonomous mobile robots powered by
+      <span class="text-zinc-200">ROS 2, C++, LiDAR & Depth SLAM</span>.
+    </p>
+
+    <!-- Primary Actions -->
+    <div class="stagger-item stagger-4 mt-8 flex flex-wrap items-center gap-3">
+      <a
+        href="#projects"
+        class="tactile-btn inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-surface-950 hover:bg-zinc-200"
+      >
+        <span>Inspect Engineering Projects</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+      <a
+        href="#contact"
+        class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-white/10 bg-surface-900 px-4 py-2.5 text-sm font-medium text-zinc-200 hover:border-white/20 hover:bg-surface-800"
+      >
+        <span>Get in Touch</span>
+      </a>
+      <a
+        href={SITE_CONFIG.socials.github}
+        target="_blank"
+        rel="noreferrer"
+        class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-white/10 bg-surface-900/50 px-3.5 py-2.5 font-mono text-xs text-zinc-300 hover:border-white/20 hover:text-white"
+      >
+        GitHub ↗
+      </a>
+    </div>
+
+    <!-- 3 Telemetry Domain Pillars (Instant Scannability) -->
+    <div class="stagger-item stagger-4 mt-14 grid gap-4 sm:grid-cols-3">
+      {SITE_CONFIG.corePillars.map((pillar, idx) => (
+        <div class="rounded-xl border border-white/[0.08] bg-surface-900/60 p-5 backdrop-blur-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">
+              0{idx + 1} // DOMAIN
+            </span>
+            <span class="rounded border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] text-emerald-300">
+              {pillar.metrics}
+            </span>
+          </div>
+          <h2 class="mt-3 text-base font-semibold text-white">{pillar.label}</h2>
+          <p class="mt-1.5 text-xs leading-relaxed text-zinc-400">{pillar.detail}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

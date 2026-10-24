@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Emil Kowalski Custom Easing Curves */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  html {
+    background-color: #090A0C;
+    color: #F3F4F6;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    selection-background-color: rgba(16, 185, 129, 0.25);
+  }
+
+  ::selection {
+    background: rgba(16, 185, 129, 0.22);
+    color: #ffffff;
+  }
+}
+
+/* Subtle engineering grid backdrop */
+.bg-telemetry-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Tactile Pressable Button Physics (160ms ease-out, scale 0.97 on active) */
+.tactile-btn {
+  transition:
+    transform 160ms var(--ease-out-strong),
+    background-color 160ms var(--ease-out-strong),
+    border-color 160ms var(--ease-out-strong),
+    color 160ms var(--ease-out-strong);
+  will-change: transform;
+}
+
+.tactile-btn:active {
+  transform: scale(0.97);
+}
+
+/* Project Card Hover Physics - Only activates on fine pointer devices (no sticky mobile hover) */
+.project-card {
+  transition:
+    transform 220ms var(--ease-out-strong),
+    border-color 220ms var(--ease-out-strong),
+    background-color 220ms var(--ease-out-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.project-card:active {
+  transform: scale(0.985);
+}
+
+/* Vaul-inspired Slide-over Sheet & Backdrop */
+.drawer-backdrop {
+  transition: opacity 280ms var(--ease-drawer);
+}
+
+.drawer-panel {
+  transition: transform 360ms var(--ease-drawer), opacity 280ms var(--ease-drawer);
+  will-change: transform;
+}
+
+/* Staggered entry on initial page load */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: staggerFadeIn 320ms var(--ease-out-strong) forwards;
+}
+
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 45ms; }
+.stagger-3 { animation-delay: 90ms; }
+.stagger-4 { animation-delay: 135ms; }
+
+@keyframes staggerFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tactile-btn,
+  .project-card,
+  .drawer-panel,
+  .stagger-item {
+    transition: opacity 150ms ease !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

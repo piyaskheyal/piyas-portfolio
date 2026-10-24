@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+import { SITE_CONFIG } from '../config/site';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProjectExplorer from '../components/ProjectExplorer';
+import CommandMenu from '../components/CommandMenu';
+import Footer from '../components/Footer.astro';
+
+const rawProjects = await getCollection('projects');
+const sortedProjects = rawProjects.sort((a, b) => a.data.order - b.data.order);
+
+// Pre-render markdown body into HTML for the interactive slide-over inspector drawer
+const projectsForClient = await Promise.all(
+  sortedProjects.map(async (entry) => {
+    return {
+      slug: entry.slug,
+      title: entry.data.title,
+      subtitle: entry.data.subtitle,
+      date: entry.data.date,
+      category: entry.data.category,
+      simEngine: entry.data.simEngine,
+      middleware: entry.data.middleware,
+      hardware: entry.data.hardware,
+      tags: entry.data.tags,
+      metrics: entry.data.metrics,
+      repoUrl: entry.data.repoUrl,
+      quickCommand: entry.data.quickCommand,
+      architectureSteps: entry.data.architectureSteps,
+      bodyHtml: entry.body
+        .replace(/### (.*)/g, '<h3>$1</h3>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^- (.*)/gm, '<li>$1</li>'),
+    };
+  })
+);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{SITE_CONFIG.name} — {SITE_CONFIG.role}</title>
+    <meta name="description" content={SITE_CONFIG.tagline} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-surface-950 bg-telemetry-grid min-h-screen text-zinc-100 antialiased">
+    <Header />
+
+    <main>
+      <Hero />
+
+      <!-- Projects & Interactive Inspector Drawer Section -->
+      <section id="projects" class="py-16 md:py-24">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-10">
+            <span class="font-mono text-xs uppercase tracking-wider text-emerald-400">
+              01 // SYSTEMS & RESEARCH PROJECTS
+            </span>
+            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              Selected Embodied AI & Robotics Work
+            </h2>
+            <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+              Select any card below to slide open the Technical Inspector with system architecture, telemetry specs, and launch commands.
+            </p>
+          </div>
+
+          <ProjectExplorer client:load projects={projectsForClient} />
+        </div>
+      </section>
+
+      <!-- Modular Technical Stack Matrix -->
+      <section id="architecture" class="border-t border-white/[0.07] py-16 md:py-24">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-10">
+            <span class="font-mono text-xs uppercase tracking-wider text-emerald-400">
+              02 // TECHNICAL CAPABILITIES
+            </span>
+            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              Simulation, Middleware & Hardware Stack
+            </h2>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {SITE_CONFIG.stack.map((group) => (
+              <div class="rounded-2xl border border-white/[0.08] bg-surface-900/60 p-5">
+                <h3 class="font-mono text-xs uppercase tracking-wider text-emerald-400">
+                  {group.category}
+                </h3>
+                <ul class="mt-4 space-y-2.5">
+                  {group.items.map((item) => (
+                    <li class="flex items-center gap-2 text-sm text-zinc-200">
+                      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <!-- Instant 0ms Command Menu (⌘K) -->
+    <CommandMenu
+      client:load
+      projects={projectsForClient.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        category: p.category,
+      }))}
+    />
+  </body>
+</html>
