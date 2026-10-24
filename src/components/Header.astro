@@ -2,37 +2,57 @@
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<header class="sticky top-0 z-30 border-b border-white/[0.07] bg-surface-950/80 backdrop-blur-md">
+<header class="sticky top-0 z-30 border-b border-black/[0.06] dark:border-white/[0.07] bg-surface-950/80 backdrop-blur-md">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
     <a href="#" class="group flex items-center gap-3 focus:outline-none">
-      <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-surface-900 font-mono text-xs font-semibold text-accent transition-colors group-hover:border-accent/40">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 font-mono text-xs font-semibold text-emerald-600 dark:text-accent transition-colors group-hover:border-emerald-500/40">
         PK
       </div>
       <div>
-        <span class="block text-sm font-medium tracking-tight text-white">
+        <span class="block text-sm font-medium tracking-tight text-zinc-900 dark:text-white">
           {SITE_CONFIG.name}
         </span>
-        <span class="block font-mono text-[11px] text-zinc-400">
+        <span class="block font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
           PHYSICAL AI • ROBOTICS
         </span>
       </div>
     </a>
 
-    <nav class="hidden items-center gap-6 text-sm text-zinc-400 md:flex">
-      <a href="#projects" class="transition-colors hover:text-white">Systems & Projects</a>
-      <a href="#architecture" class="transition-colors hover:text-white">Technical Stack</a>
-      <a href="#contact" class="transition-colors hover:text-white">Contact</a>
+    <nav class="hidden items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400 md:flex">
+      <a href="#projects" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Systems</a>
+      <a href="#experience" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Journey</a>
+      <a href="#rig" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Lab Rig</a>
+      <a href="#architecture" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Stack</a>
+      <a href="#contact" class="transition-colors hover:text-zinc-900 dark:hover:text-white">Contact</a>
     </nav>
 
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center gap-2">
+      <!-- Precision Theme Toggle -->
+      <button
+        id="theme-toggle-btn"
+        type="button"
+        class="tactile-btn flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+        aria-label="Toggle theme"
+      >
+        <!-- Sun icon (visible in dark mode) -->
+        <svg class="h-4 w-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14l-1.41 1.41"></path>
+        </svg>
+        <!-- Moon icon (visible in light mode) -->
+        <svg class="h-4 w-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
       <button
         id="open-cmd-btn"
         type="button"
-        class="tactile-btn flex items-center gap-2.5 rounded-lg border border-white/10 bg-surface-900 px-3 py-1.5 text-xs text-zinc-300 hover:border-white/20 hover:text-white"
+        class="tactile-btn flex items-center gap-2.5 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 px-3 py-1.5 text-xs text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
         aria-label="Open command menu"
       >
         <span>Quick Jump</span>
-        <kbd class="rounded border border-white/10 bg-surface-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
+        <kbd class="rounded border border-black/[0.06] dark:border-white/10 bg-surface-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
           ⌘K
         </kbd>
       </button>
@@ -41,8 +61,22 @@ import { SITE_CONFIG } from '../config/site';
 </header>
 
 <script>
-  const btn = document.getElementById('open-cmd-btn');
-  btn?.addEventListener('click', () => {
+  const cmdBtn = document.getElementById('open-cmd-btn');
+  cmdBtn?.addEventListener('click', () => {
     window.dispatchEvent(new CustomEvent('toggle-cmd-menu'));
+  });
+
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  themeBtn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      window.dispatchEvent(new CustomEvent('show-toast', { detail: { message: 'Switched to Light Theme' } }));
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      window.dispatchEvent(new CustomEvent('show-toast', { detail: { message: 'Switched to Dark Theme' } }));
+    }
   });
 </script>

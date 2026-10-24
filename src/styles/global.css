@@ -3,31 +3,56 @@
 @tailwind utilities;
 
 :root {
+  /* Precision Laboratory Light Theme Surface Tokens (RGB triplets) */
+  --surface-950: 246 248 250; /* #F6F8FA body canvas */
+  --surface-900: 255 255 255; /* #FFFFFF elevated cards */
+  --surface-800: 236 239 244; /* #ECEFF4 secondary surfaces / pills */
+  --surface-700: 222 226 233; /* #DEE2E9 active borders */
+
   /* Emil Kowalski Custom Easing Curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+html.dark {
+  /* Deep Carbon Robotics Telemetry Dark Theme Surface Tokens (RGB triplets) */
+  --surface-950: 9 10 12;    /* #090A0C */
+  --surface-900: 16 18 22;   /* #101216 */
+  --surface-800: 24 27 32;   /* #181B20 */
+  --surface-700: 36 41 48;   /* #242930 */
+}
+
 @layer base {
   html {
-    background-color: #090A0C;
-    color: #F3F4F6;
+    background-color: rgb(var(--surface-950));
+    color: #111827;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    selection-background-color: rgba(16, 185, 129, 0.25);
+  }
+
+  html.dark {
+    color: #F3F4F6;
   }
 
   ::selection {
     background: rgba(16, 185, 129, 0.22);
-    color: #ffffff;
+    color: currentColor;
   }
 }
 
 /* Subtle engineering grid backdrop */
 .bg-telemetry-grid {
   background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+html.dark .bg-telemetry-grid {
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
@@ -58,11 +83,38 @@
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover {
     transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.16);
+  }
+  html.dark .project-card:hover {
     border-color: rgba(255, 255, 255, 0.18);
   }
 }
 
 .project-card:active {
+  transform: scale(0.985);
+}
+
+/* Interactive Surface Hover Physics for telemetry cards */
+.interactive-card {
+  transition:
+    transform 200ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.14);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  html.dark .interactive-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(18, 20, 24, 0.85);
+  }
+}
+
+.interactive-card:active {
   transform: scale(0.985);
 }
 
@@ -72,7 +124,9 @@
 }
 
 .drawer-panel {
-  transition: transform 360ms var(--ease-drawer), opacity 280ms var(--ease-drawer);
+  transition:
+    transform 360ms var(--ease-drawer),
+    opacity 280ms var(--ease-drawer);
   will-change: transform;
 }
 
@@ -87,6 +141,8 @@
 .stagger-2 { animation-delay: 45ms; }
 .stagger-3 { animation-delay: 90ms; }
 .stagger-4 { animation-delay: 135ms; }
+.stagger-5 { animation-delay: 180ms; }
+.stagger-6 { animation-delay: 225ms; }
 
 @keyframes staggerFadeIn {
   to {
@@ -95,12 +151,53 @@
   }
 }
 
+/* Project Filter Card Entrance Animation */
+.card-filter-enter {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: cardFadeIn 240ms var(--ease-out) forwards;
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pipeline Step Stagger Entrance inside Drawer */
+.drawer-step-enter {
+  opacity: 0;
+  transform: translateY(4px);
+  animation: cardFadeIn 240ms var(--ease-out) forwards;
+}
+
+/* Floating Sonner-Style Toast Notification */
+.toast-surface {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
+  will-change: transform, opacity;
+}
+
+.toast-surface[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 /* Accessibility: Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .tactile-btn,
   .project-card,
+  .interactive-card,
   .drawer-panel,
-  .stagger-item {
+  .drawer-backdrop,
+  .stagger-item,
+  .card-filter-enter,
+  .drawer-step-enter,
+  .toast-surface {
     transition: opacity 150ms ease !important;
     animation: none !important;
     transform: none !important;

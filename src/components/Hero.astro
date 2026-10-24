@@ -2,72 +2,154 @@
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<section class="relative overflow-hidden border-b border-white/[0.07] pt-14 pb-16 md:pt-20 md:pb-24">
+<section class="relative overflow-hidden border-b border-black/[0.06] dark:border-white/[0.07] pt-12 pb-16 md:pt-16 md:pb-20">
   <div class="mx-auto max-w-6xl px-6">
-    <!-- Live Telemetry Status Pill -->
-    <div class="stagger-item stagger-1 inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/[0.07] px-3.5 py-1 text-xs font-medium text-emerald-300">
-      <span class="relative flex h-2 w-2">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
-      </span>
-      <span class="font-mono text-[11px] uppercase tracking-wider">{SITE_CONFIG.status}</span>
-    </div>
-
-    <!-- Main Headline -->
-    <h1 class="stagger-item stagger-2 mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl md:leading-[1.08]">
-      Building embodied intelligence from <span class="text-emerald-400">Isaac Lab</span> simulation to physical hardware.
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="stagger-item stagger-3 mt-6 max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
-      I’m <strong class="font-medium text-zinc-100">{SITE_CONFIG.name}</strong> — a Robotics Engineer specializing in
-      <span class="text-zinc-200">Physical AI</span>, bipedal locomotion in
-      <span class="text-zinc-200">NVIDIA Isaac Sim & Isaac Lab</span>,
-      <span class="text-zinc-200">VLA training on the SO-101 arm</span>, and autonomous mobile robots powered by
-      <span class="text-zinc-200">ROS 2, C++, LiDAR & Depth SLAM</span>.
-    </p>
-
-    <!-- Primary Actions -->
-    <div class="stagger-item stagger-4 mt-8 flex flex-wrap items-center gap-3">
-      <a
-        href="#projects"
-        class="tactile-btn inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-surface-950 hover:bg-zinc-200"
-      >
-        <span>Inspect Engineering Projects</span>
-        <span aria-hidden="true">↓</span>
-      </a>
-      <a
-        href="#contact"
-        class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-white/10 bg-surface-900 px-4 py-2.5 text-sm font-medium text-zinc-200 hover:border-white/20 hover:bg-surface-800"
-      >
-        <span>Get in Touch</span>
-      </a>
-      <a
-        href={SITE_CONFIG.socials.github}
-        target="_blank"
-        rel="noreferrer"
-        class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-white/10 bg-surface-900/50 px-3.5 py-2.5 font-mono text-xs text-zinc-300 hover:border-white/20 hover:text-white"
-      >
-        GitHub ↗
-      </a>
-    </div>
-
-    <!-- 3 Telemetry Domain Pillars (Instant Scannability) -->
-    <div class="stagger-item stagger-4 mt-14 grid gap-4 sm:grid-cols-3">
-      {SITE_CONFIG.corePillars.map((pillar, idx) => (
-        <div class="rounded-xl border border-white/[0.08] bg-surface-900/60 p-5 backdrop-blur-sm">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">
-              0{idx + 1} // DOMAIN
-            </span>
-            <span class="rounded border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] text-emerald-300">
-              {pillar.metrics}
-            </span>
-          </div>
-          <h2 class="mt-3 text-base font-semibold text-white">{pillar.label}</h2>
-          <p class="mt-1.5 text-xs leading-relaxed text-zinc-400">{pillar.detail}</p>
+    <div class="grid items-center gap-10 lg:grid-cols-12">
+      <!-- Left Column: Personal Narrative, Headline & Primary CTAs -->
+      <div class="space-y-6 lg:col-span-7">
+        <!-- Live Status Pill -->
+        <div class="stagger-item stagger-1 inline-flex items-center gap-2.5 rounded-full border border-emerald-600/20 bg-emerald-600/[0.08] px-3.5 py-1 text-xs font-medium text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/[0.07] dark:text-emerald-300">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 dark:bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
+          </span>
+          <span class="font-mono text-[11px] uppercase tracking-wider">{SITE_CONFIG.status}</span>
         </div>
-      ))}
+
+        <!-- Main Headline -->
+        <h1 class="stagger-item stagger-2 text-4xl font-semibold tracking-tight text-zinc-900 dark:text-white sm:text-5xl md:leading-[1.1]">
+          Architecting <span class="text-emerald-600 dark:text-emerald-400">embodied intelligence</span> from Isaac Lab simulation to physical hardware.
+        </h1>
+
+        <!-- Personal Subtitle -->
+        <p class="stagger-item stagger-3 text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+          I’m <strong class="font-medium text-zinc-900 dark:text-zinc-100">{SITE_CONFIG.name}</strong> — a Robotics Engineer focused on
+          <span class="text-zinc-800 dark:text-zinc-200">Physical AI & VLA manipulation</span> on the SO-101 6-DoF arm,
+          <span class="text-zinc-800 dark:text-zinc-200">massively parallel RL for bipedal locomotion</span> in NVIDIA Isaac Lab, and
+          <span class="text-zinc-800 dark:text-zinc-200">deterministic C++ ROS 2 navigation</span>.
+        </p>
+
+        <!-- Primary Actions -->
+        <div class="stagger-item stagger-4 flex flex-wrap items-center gap-3 pt-1">
+          <a
+            href="#projects"
+            class="tactile-btn inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-surface-950 dark:hover:bg-zinc-200 shadow-sm"
+          >
+            <span>Explore Robotic Systems</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a
+            href="#experience"
+            class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:text-zinc-900 dark:text-zinc-200 dark:hover:text-white hover:bg-surface-800 shadow-xs dark:shadow-none"
+          >
+            <span>Research & Journey</span>
+          </a>
+          <a
+            href={SITE_CONFIG.socials.github}
+            target="_blank"
+            rel="noreferrer"
+            class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900/60 px-3.5 py-2.5 font-mono text-xs text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+          >
+            GitHub ↗
+          </a>
+          <a
+            href={SITE_CONFIG.socials.youtube}
+            target="_blank"
+            rel="noreferrer"
+            class="tactile-btn inline-flex items-center gap-2 rounded-lg border border-black/[0.08] dark:border-white/10 bg-surface-900/60 px-3.5 py-2.5 font-mono text-xs text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+          >
+            YouTube ↗
+          </a>
+        </div>
+
+        <!-- Telemetry Numbers Grid -->
+        <div class="stagger-item stagger-4 pt-4">
+          <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 rounded-xl border border-black/[0.06] dark:border-white/[0.08] bg-surface-900/80 dark:bg-surface-900/40 p-3.5 backdrop-blur-xs">
+            {SITE_CONFIG.stats.map((s) => (
+              <div>
+                <div class="font-mono text-base font-semibold text-zinc-900 dark:text-emerald-400">
+                  {s.value}
+                </div>
+                <div class="mt-0.5 font-mono text-[10px] uppercase text-zinc-500 dark:text-zinc-400">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Personal Engineer Portrait & Telemetry Card -->
+      <div class="stagger-item stagger-3 lg:col-span-5">
+        <div class="interactive-card relative overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/15 bg-surface-900/90 dark:bg-surface-900/80 p-4 shadow-xl backdrop-blur-md">
+          <!-- Top Card Telemetry Header -->
+          <div class="mb-3 flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.08] pb-3 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-semibold text-emerald-600 dark:text-emerald-400">ID: PK-01</span>
+              <span class="font-mono text-zinc-400 dark:text-zinc-500">// ROBOTICS RESEARCH</span>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>{SITE_CONFIG.location}</span>
+            </div>
+          </div>
+
+          <!-- Engineer Portrait Frame -->
+          <div class="group relative overflow-hidden rounded-xl border border-black/[0.06] dark:border-white/10 bg-surface-950">
+            <!-- Telemetry Crosshairs in Corners -->
+            <span class="pointer-events-none absolute left-2.5 top-2.5 z-10 font-mono text-[10px] text-emerald-500 opacity-70">+</span>
+            <span class="pointer-events-none absolute right-2.5 top-2.5 z-10 font-mono text-[10px] text-emerald-500 opacity-70">+</span>
+            <span class="pointer-events-none absolute bottom-2.5 left-2.5 z-10 font-mono text-[10px] text-emerald-500 opacity-70">+</span>
+            <span class="pointer-events-none absolute bottom-2.5 right-2.5 z-10 font-mono text-[10px] text-emerald-500 opacity-70">+</span>
+
+            <img
+              src={SITE_CONFIG.avatar}
+              alt={SITE_CONFIG.name}
+              onerror={`this.onerror=null;this.src='${SITE_CONFIG.avatarFallback}'`}
+              loading="eager"
+              decoding="async"
+              class="h-[320px] sm:h-[340px] w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+
+            <!-- Bottom Floating Overlay Badge -->
+            <div class="absolute inset-x-2 bottom-2 rounded-lg border border-black/10 dark:border-white/10 bg-surface-900/90 dark:bg-surface-950/85 p-2.5 backdrop-blur-md">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs font-semibold text-zinc-900 dark:text-white">
+                    {SITE_CONFIG.name}
+                  </div>
+                  <div class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400">
+                    Physical AI • Sim-to-Real • Manipulation
+                  </div>
+                </div>
+                <span class="rounded bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-700 dark:text-emerald-300">
+                  VERIFIED
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Telemetry Spec Summary -->
+          <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
+            <div class="rounded-lg border border-black/[0.05] dark:border-white/[0.06] bg-surface-800/40 dark:bg-surface-950/60 p-2.5">
+              <span class="block font-mono text-[9px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                Core Lab Hardware
+              </span>
+              <span class="mt-0.5 block font-medium text-zinc-800 dark:text-zinc-200 text-[11px]">
+                SO-101 6-DoF Arm & LiDAR
+              </span>
+            </div>
+            <div class="rounded-lg border border-black/[0.05] dark:border-white/[0.06] bg-surface-800/40 dark:bg-surface-950/60 p-2.5">
+              <span class="block font-mono text-[9px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                Simulation Engine
+              </span>
+              <span class="mt-0.5 block font-medium text-zinc-800 dark:text-zinc-200 text-[11px]">
+                NVIDIA Isaac Lab & Sim
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
