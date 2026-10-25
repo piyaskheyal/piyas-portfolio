@@ -3,36 +3,35 @@ import ScrollBlurReveal from './ScrollBlurReveal';
 import { SITE_CONFIG } from '../config/site';
 ---
 
-<section id="process" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#0F0F0F] text-white">
+<section id="process" class="py-16 md:py-24 border-b border-stone-200 dark:border-white/10 bg-[#F6F6F4] dark:bg-[#0F0F0F] text-zinc-900 dark:text-zinc-100 transition-colors">
   <div class="mx-auto max-w-7xl px-4 sm:px-6">
     <!-- Header -->
     <div class="reveal-on-scroll space-y-4 mb-16">
-      <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-white font-mono text-xs">
-        <span class="text-[#EB4618]">✦</span>
-        <span class="tracking-widest font-semibold uppercase">RIGOROUS PIPELINE</span>
+      <div class="section-pill-badge">
+        <span class="section-pill-star">✦</span>
+        <span>RIGOROUS PIPELINE</span>
       </div>
 
       <ScrollBlurReveal
         client:visible
         primaryText="ENGINEERING PROCESS"
         blurredText="THAT BRIDGES SIM-TO-REAL."
-        className="text-white"
       />
     </div>
 
-    <!-- 4-Column Dark Card Grid -->
+    <!-- 4-Column Card Grid -->
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {SITE_CONFIG.process.map((item, idx) => (
-        <div class={`reveal-on-scroll delay-${idx + 1} relative flex flex-col justify-between rounded-xl border border-white/15 bg-[#161616] p-7 transition-all duration-300 hover:border-[#EB4618] hover:-translate-y-1`}>
+        <div class={`reveal-on-scroll delay-${idx + 1} relative flex flex-col justify-between rounded-2xl border border-stone-300 dark:border-white/15 bg-white dark:bg-[#161616] p-7 transition-all duration-300 hover:border-[#EB4618] hover:-translate-y-1 shadow-sm`}>
           <!-- Corner Crosshairs -->
-          <span class="crosshair-corner crosshair-tl text-white/30">+</span>
-          <span class="crosshair-corner crosshair-tr text-white/30">+</span>
-          <span class="crosshair-corner crosshair-bl text-white/30">+</span>
-          <span class="crosshair-corner crosshair-br text-white/30">+</span>
+          <span class="crosshair-corner crosshair-tl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-tr text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-bl text-zinc-400">+</span>
+          <span class="crosshair-corner crosshair-br text-zinc-400">+</span>
 
           <div>
             <!-- Top Step Number & Orange Icon -->
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <div class="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
               <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#EB4618]">
                 PHASE // {item.step}
               </span>
@@ -42,18 +41,18 @@ import { SITE_CONFIG } from '../config/site';
             </div>
 
             <!-- Title & Description -->
-            <h3 class="mt-6 text-xl font-extrabold uppercase tracking-tight text-white">
+            <h3 class="mt-6 text-xl font-extrabold uppercase tracking-tight text-zinc-950 dark:text-white">
               {item.title}
             </h3>
 
-            <p class="mt-4 text-xs sm:text-sm leading-relaxed text-zinc-400">
+            <p class="mt-4 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               {item.desc}
             </p>
           </div>
 
-          <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+          <div class="mt-8 pt-4 border-t border-stone-200 dark:border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
             <span>Verified Spec</span>
-            <span>✦ OK</span>
+            <span class="text-[#EB4618] font-bold">✦ OK</span>
           </div>
         </div>
       ))}
