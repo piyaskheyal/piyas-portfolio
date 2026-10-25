@@ -144,9 +144,10 @@ Provide a concise 1-2 paragraph overview of the system architecture, motivation,
 
 ### Supported Categories:
 The `category` field must match one of the defined enums in `src/content/config.ts`:
-- `'Bipedal & Isaac Lab'`
+- `'Reinforcement Learning & Isaac Lab'`
 - `'VLA & Manipulation'`
-- `'AMR & SLAM'`
+- `'AMR, SLAM & Navigation'`
+- `'Perception & Computer Vision'`
 
 *(To add a new category, simply add it to the enum in `src/content/config.ts` and `CATEGORIES` in `src/components/ProjectExplorer.tsx`).*
 

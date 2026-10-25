@@ -6,7 +6,7 @@ const projectsCollection = defineCollection({
     title: z.string(),
     subtitle: z.string(),
     date: z.string(),
-    category: z.enum(['Bipedal & Isaac Lab', 'VLA & Manipulation', 'AMR & SLAM']),
+    category: z.enum(['Reinforcement Learning & Isaac Lab', 'VLA & Manipulation', 'AMR, SLAM & Navigation', 'Perception & Computer Vision']),
     featured: z.boolean().default(true),
     order: z.number(),
     simEngine: z.string(),

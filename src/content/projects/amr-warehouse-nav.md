@@ -2,7 +2,7 @@
 title: "AMR Warehouse Navigation & 2D SLAM"
 subtitle: "Autonomous mobile robot navigation and 2D LiDAR SLAM simulated in NVIDIA Isaac Sim 6.1.0 with ROS 2 Jazzy."
 date: "2026 — IN PROGRESS"
-category: "AMR & SLAM"
+category: "AMR, SLAM & Navigation"
 featured: true
 order: 1
 simEngine: "NVIDIA Isaac Sim 6.1.0"
