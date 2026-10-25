@@ -1,5 +1,16 @@
-node_modules/
-dist/
 context-handoff.md
 .agents/
 .context/
+
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs & environment
+npm-debug.log*
+.env
+.env.*
+.DS_Store
